@@ -254,3 +254,22 @@ a{ color:var(--primary); text-decoration:none }
 .form-status.error{
   background: rgba(239, 68, 68, .12);
 }
+.logo-wrap{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+}
+
+.site-logo{
+  height:38px;
+  width:auto;
+}
+
+.brand-text{
+  font-weight:700;
+  color:var(--text);
+}
+
+.brand-sub{
+  color:var(--primary);
+}
