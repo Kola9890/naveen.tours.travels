@@ -18,12 +18,15 @@
     }
     .splash{
       text-align:center;
-      animation:fadeIn 1.2s ease-in-out;
+      opacity:0;
+      transition:opacity .4s ease;
     }
+    .splash.show{ opacity:1; }
     .splash img{
       width:260px;
       max-width:80%;
-      animation:zoom 2s ease-in-out;
+      display:block;
+      margin:0 auto;
     }
     .loading{
       margin-top:12px;
@@ -31,44 +34,34 @@
       color:#0ea5a3;
       letter-spacing:.5px;
     }
-    @keyframes fadeIn{
-      from{opacity:0}
-      to{opacity:1}
-    }
-    @keyframes zoom{
-      from{transform:scale(.85)}
-      to{transform:scale(1)}
-    }
   </style>
-
-  <script>
-    (function(){
-      const KEY = 'ntt_splash_seen';
-      const DAY = 24 * 60 * 60 * 1000;
-
-      const lastSeen = localStorage.getItem(KEY);
-      const now = Date.now();
-
-      // If splash already seen within 24 hours → go directly to home
-      if (lastSeen && now - Number(lastSeen) < DAY) {
-        window.location.replace('home.html');
-      } else {
-        // Mark splash as seen
-        localStorage.setItem(KEY, now.toString());
-
-        // Redirect after 3 seconds
-        setTimeout(() => {
-          window.location.replace('home.html');
-        }, 3000);
-      }
-    })();
-  </script>
 </head>
 
 <body>
-  <div class="splash">
-    <img src="assets/img/logo.png" alt="Naveen Tours & Travels Logo">
+  <div class="splash" id="splash">
+    <img id="logo" src="assets/img/logo.png" alt="Naveen Tours & Travels Logo">
     <div class="loading">Loading…</div>
   </div>
+
+  <script>
+    const splash = document.getElementById('splash');
+    const logo = document.getElementById('logo');
+
+    function goHome() {
+      window.location.replace('home.html');
+    }
+
+    // Show splash only after image loads (prevents flashing)
+    logo.onload = () => {
+      splash.classList.add('show');
+      setTimeout(goHome, 3000); // change 3000 to 5000 for 5 seconds
+    };
+
+    // If logo fails to load, still go home after 2 seconds
+    logo.onerror = () => {
+      splash.classList.add('show');
+      setTimeout(goHome, 2000);
+    };
+  </script>
 </body>
 </html>
