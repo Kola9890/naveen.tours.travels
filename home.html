@@ -18,14 +18,12 @@
 <header class="site-header">
   <div class="container header-inner">
 
-    <a class="logo logo-wrap" href="home.html">
-      <img src="assets/img/logo.png" alt="Naveen Tours & Travels" class="site-logo">
-      <span class="brand-text">
-        Naveen <span class="brand-sub">Tours & Travels</span>
-      </span>
+    <a class="logo logo-wrap" href="home.html" aria-label="Naveen Tours & Travels">
+      <img src="assets/img/logo.png" alt="Naveen Tours & Travels Logo" class="site-logo">
+      <span class="brand-text">Naveen <span class="brand-sub">Tours & Travels</span></span>
     </a>
 
-    <nav class="nav">
+    <nav class="nav" aria-label="Primary">
       <a href="home.html" aria-current="page">Home</a>
       <a href="results.html">Results</a>
       <a href="contact.html">Contact</a>
@@ -33,9 +31,9 @@
     </nav>
 
     <div class="header-actions">
-      <button id="themeToggle" class="toggle">🌙</button>
-      <a class="cta call" href="tel:+919492842937">📞 Call</a>
-      <a class="cta whatsapp" id="waHeader" href="#" target="_blank">WhatsApp</a>
+      <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
+      <a class="cta call" href="tel:+919492842937" aria-label="Call Naveen Tours">📞 Call</a>
+      <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
     </div>
 
   </div>
@@ -44,8 +42,10 @@
 <section class="hero">
   <div class="container">
 
-    <h1>Book Comfortable City & Outstation Cabs</h1>
-    <p class="muted">Pan-India service • Reliable drivers • Instant WhatsApp quotes</p>
+    <div class="hero-top">
+      <h1>Book Comfortable City & Outstation Cabs</h1>
+      <p class="muted">Pan-India service • Reliable drivers • Instant WhatsApp quotes</p>
+    </div>
 
     <div class="pill-card card">
       <form id="searchForm" class="pill-grid">
@@ -54,7 +54,13 @@
         <div class="pill-item with-icon suggest-wrap">
           <span class="label">Leaving From</span>
           <span class="icon"><img src="assets/img/pin.svg" alt=""></span>
-          <input type="text" id="src" placeholder="Start typing (Da / Dac)" autocomplete="off" required>
+          <input
+            type="text"
+            id="src"
+            placeholder="Type at least 2 letters (e.g., Da)"
+            autocomplete="off"
+            required
+          >
           <div class="suggestions" id="srcSuggestions"></div>
         </div>
 
@@ -62,17 +68,25 @@
         <div class="pill-item with-icon suggest-wrap">
           <span class="label">Going To</span>
           <span class="icon"><img src="assets/img/pin.svg" alt=""></span>
-          <input type="text" id="dst" placeholder="Start typing destination" autocomplete="off" required>
+          <input
+            type="text"
+            id="dst"
+            placeholder="Type at least 2 letters (e.g., Gu)"
+            autocomplete="off"
+            required
+          >
           <div class="suggestions" id="dstSuggestions"></div>
         </div>
 
-        <div class="pill-item with-icon">
+        <!-- Date -->
+        <label class="pill-item with-icon">
           <span class="label">Departure</span>
           <span class="icon"><img src="assets/img/calendar.svg" alt=""></span>
           <input type="date" id="date" required>
-        </div>
+        </label>
 
-        <div class="pill-item with-icon">
+        <!-- Vehicle -->
+        <label class="pill-item with-icon">
           <span class="label">Vehicle</span>
           <span class="icon"><img src="assets/img/car.svg" alt=""></span>
           <select id="vehicle">
@@ -81,15 +95,39 @@
             <option>Etios</option>
             <option>Ertiga</option>
             <option>Scorpio</option>
+            <option>TATA Winger</option>
             <option>Force Urbania</option>
           </select>
-        </div>
+        </label>
 
+        <!-- Actions -->
         <div class="pill-actions">
+          <div class="quick">
+            <span class="chip muted">Quick date</span>
+            <button type="button" class="chip" onclick="setToday()">Today</button>
+            <button type="button" class="chip" onclick="setTomorrow()">Tomorrow</button>
+          </div>
           <button class="btn search" type="submit">Search →</button>
         </div>
 
       </form>
+    </div>
+
+    <div class="hero-art space">
+      <div class="grid hero-feature">
+        <div class="card accent1">
+          <h3>Outstation Trips</h3>
+          <p class="muted">Weekend trips, airport rides, long-distance travel.</p>
+        </div>
+        <div class="card accent2">
+          <h3>Transparent Pricing</h3>
+          <p class="muted">No hidden charges. Final quote on WhatsApp.</p>
+        </div>
+        <div class="card accent3">
+          <h3>Reliable Drivers</h3>
+          <p class="muted">Experienced, polite, and on-time drivers.</p>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -97,12 +135,17 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© <span id="year"></span> Naveen Tours & Travels</p>
+    <p>© <span id="year"></span> Naveen Tours & Travels • All rights reserved.</p>
+    <div class="footer-links">
+      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a>
+    </div>
   </div>
 </footer>
 
-<a class="floating-call" href="tel:+919492842937">📞</a>
-<a class="floating-whatsapp" id="waFloat" href="#" target="_blank">💬</a>
+<!-- Floating buttons -->
+<a class="floating-call" href="tel:+919492842937" aria-label="Call Naveen Tours">📞</a>
+<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">💬</a>
 
 </body>
 </html>
