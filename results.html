@@ -17,11 +17,17 @@
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="logo" href="home.html">Naveen <span>Tours & Travels</span></a>
+
+    <a class="logo logo-wrap" href="home.html" aria-label="Naveen Tours & Travels">
+      <img src="assets/img/logo.png" alt="Naveen Tours & Travels Logo" class="site-logo">
+      <span class="brand-text">
+        Naveen <span class="brand-sub">Tours & Travels</span>
+      </span>
+    </a>
 
     <nav class="nav" aria-label="Primary">
       <a href="home.html">Home</a>
-      <a href="results.html">Results</a>
+      <a href="results.html" aria-current="page">Results</a>
       <a href="contact.html">Contact</a>
       <a href="about.html">About</a>
     </nav>
@@ -30,6 +36,7 @@
       <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
       <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
     </div>
+
   </div>
 </header>
 
@@ -63,9 +70,7 @@
   </div>
 </footer>
 
-<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">
-  💬
-</a>
+<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">💬</a>
 
 </body>
-</html> 
+</html>
