@@ -5,7 +5,7 @@
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
-  whatsappNumber: '919492843937',
+  whatsappNumber: '919492842937', 
   phoneDisplay: '+91 9492842937',
   email: 'info.naveentoursandtravels@gmail.com',
   avgSpeedKmph: 45,
