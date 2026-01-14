@@ -273,3 +273,12 @@ a{ color:var(--primary); text-decoration:none }
 .brand-sub{
   color:var(--primary);
 }
+/* Contact page spacing fix */
+.contact-list li{
+  margin-bottom: 8px;
+}
+
+.cta-row{
+  margin-top: 16px;   /* space above WhatsApp button */
+}
+
