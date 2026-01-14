@@ -1,10 +1,9 @@
-/* Naveen Tours & Travels - script.js (FINAL) */
+/* Naveen Tours & Travels - script.js (FINAL COMPLETE) */
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
-  whatsappNumber: '919492842937', // 91 + 9492842937
-  email: 'info.naveentoursandtravels@gmail.com',
-  avgSpeedKmph: 45,
+  whatsappNumber: '919492842937',
+  email: 'info.naveentoursandtravels@gmail.com'
 };
 
 /* ================= THEME ================= */
@@ -15,45 +14,31 @@ function initTheme() {
   const btn = document.getElementById('themeToggle');
   if (!btn) return;
 
-  btn.onclick = () => {
+  btn.addEventListener('click', () => {
     const cur = document.documentElement.getAttribute('data-theme') || 'light';
     const next = cur === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
-  };
+  });
 }
 
-/* ================= DATE SHORTCUTS (optional) ================= */
-function setToday() {
-  const d = document.getElementById('date');
-  if (!d) return;
-  d.value = new Date().toISOString().slice(0, 10);
-}
-function setTomorrow() {
-  const d = document.getElementById('date');
-  if (!d) return;
-  d.value = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
-}
-
-/* ================= WHATSAPP LINKS ================= */
+/* ================= WHATSAPP ================= */
 function initWhatsApp() {
   const msg = encodeURIComponent(
-    `Hi ${CONFIG.owner}, I would like to enquire about cabs.`
+    `Hi ${CONFIG.owner}, I would like to enquire about cab services.`
   );
   const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`;
 
   const waHeader = document.getElementById('waHeader');
-  if (waHeader) waHeader.href = url;
-
   const waFloat = document.getElementById('waFloat');
-  if (waFloat) waFloat.href = url;
-
   const waContact = document.getElementById('waContact');
+
+  if (waHeader) waHeader.href = url;
+  if (waFloat) waFloat.href = url;
   if (waContact) waContact.href = url;
 }
 
 /* ================= AUTOCOMPLETE DATA ================= */
-/* Add more cities/villages here anytime */
 const INDIA_PLACES = [
   "Dachepalli","Dadar","Darjeeling","Davanagere","Davuluru",
   "Delhi","Guntur","Hyderabad","Vijayawada","Visakhapatnam",
@@ -98,7 +83,7 @@ function attachAutocomplete(inputId, boxId) {
       item.className = 'item';
       item.textContent = place;
 
-      // ✅ pointerdown works on mobile + desktop
+      // works on mobile + desktop
       item.addEventListener('pointerdown', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -112,16 +97,10 @@ function attachAutocomplete(inputId, boxId) {
     show();
   });
 
-  // Close only when clicking outside
   document.addEventListener('pointerdown', (e) => {
     if (open && !box.contains(e.target) && e.target !== input) {
       hide();
     }
-  });
-
-  // ESC closes
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') hide();
   });
 }
 
@@ -129,64 +108,62 @@ function attachAutocomplete(inputId, boxId) {
 function handleSearchSubmit(e) {
   e.preventDefault();
 
-  const src = (document.getElementById('src')?.value || '').trim();
-  const dst = (document.getElementById('dst')?.value || '').trim();
-  const date = document.getElementById('date')?.value || '';
+  const src = document.getElementById('src')?.value.trim();
+  const dst = document.getElementById('dst')?.value.trim();
+  const date = document.getElementById('date')?.value;
   const vehicle = document.getElementById('vehicle')?.value || '';
 
   if (!src || !dst || !date) {
-    alert('Please fill Leaving From, Going To, and Departure date');
+    alert('Please fill Leaving From, Going To and Date');
     return;
   }
 
-  localStorage.setItem('booking', JSON.stringify({ src, dst, date, vehicle }));
+  localStorage.setItem(
+    'booking',
+    JSON.stringify({ src, dst, date, vehicle })
+  );
+
   window.location.href = 'results.html';
 }
 
-/* ================= RESULTS SUMMARY ================= */
-function escapeHTML(str) {
-  return String(str ?? '')
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
-}
-
+/* ================= RESULTS PAGE ================= */
 function renderSummary() {
   const box = document.getElementById('summary');
   if (!box) return;
 
   let data = {};
-  try { data = JSON.parse(localStorage.getItem('booking') || '{}'); } catch {}
-
-  const vehicleText = data.vehicle ? data.vehicle : 'Not specified';
+  try {
+    data = JSON.parse(localStorage.getItem('booking') || '{}');
+  } catch {}
 
   box.innerHTML = `
     <h3>Trip Summary</h3>
-    <p><strong>Leaving From:</strong> ${escapeHTML(data.src || '—')}</p>
-    <p><strong>Going To:</strong> ${escapeHTML(data.dst || '—')}</p>
-    <p><strong>Departure:</strong> ${escapeHTML(data.date || '—')}</p>
-    <p><strong>Vehicle:</strong> ${escapeHTML(vehicleText)}</p>
-    <p class="muted small">For fares, tap WhatsApp and we’ll share a clear quote.</p>
+    <p><strong>Leaving From:</strong> ${data.src || '—'}</p>
+    <p><strong>Going To:</strong> ${data.dst || '—'}</p>
+    <p><strong>Date:</strong> ${data.date || '—'}</p>
+    <p><strong>Vehicle:</strong> ${data.vehicle || 'Any'}</p>
+    <p class="muted">For price, contact us on WhatsApp.</p>
   `;
 
-  // WhatsApp quote button (results page)
-  const msg = encodeURIComponent(
-    `Hi ${CONFIG.owner},
-Ride Enquiry
-From: ${data.src || '—'}
-To: ${data.dst || '—'}
-Date: ${data.date || '—'}
-Vehicle: ${vehicleText}`
-  );
-  const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`;
-
   const waBtn = document.getElementById('waQuote');
-  if (waBtn) waBtn.onclick = () => window.open(waUrl, '_blank', 'noopener,noreferrer');
+  if (waBtn) {
+    const msg = encodeURIComponent(
+      `Hi ${CONFIG.owner},
+Trip enquiry:
+From: ${data.src}
+To: ${data.dst}
+Date: ${data.date}
+Vehicle: ${data.vehicle || 'Any'}`
+    );
+    waBtn.onclick = () =>
+      window.open(
+        `https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`,
+        '_blank'
+      );
+  }
 }
 
-/* ================= CONTACT FORM (optional) ================= */
+/* ================= CONTACT FORM ================= */
 function initContactForm() {
   const form = document.getElementById('contactForm');
   if (!form) return;
@@ -194,48 +171,41 @@ function initContactForm() {
   const emailBtn = document.getElementById('emailFallback');
   const status = document.getElementById('formStatus');
 
-  const get = (id) => (document.getElementById(id)?.value || '').trim();
-  const digitsOnly = (s) => (s || '').replace(/\D/g, '');
+  const get = id => document.getElementById(id)?.value.trim() || '';
 
-  function showStatus(text, type) {
+  function showStatus(msg, type) {
     if (!status) return;
-    status.textContent = text;
+    status.textContent = msg;
     status.className = `form-status ${type}`;
     status.style.display = 'block';
   }
 
-  function buildText() {
+  function buildMsg() {
     return `Hi ${CONFIG.owner},
-New Booking Request
 Name: ${get('cfName')}
 Phone: ${get('cfPhone')}
 From: ${get('cfFrom')}
 To: ${get('cfTo')}
 Date: ${get('cfDate')}
-Vehicle: ${get('cfVehicle') || 'Not specified'}
-Message: ${get('cfMsg') || '—'}`;
+Vehicle: ${get('cfVehicle')}
+Message: ${get('cfMsg')}`;
   }
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', e => {
     e.preventDefault();
-
-    const phone = digitsOnly(get('cfPhone'));
-    if (phone.length !== 10) {
-      showStatus('Enter valid 10-digit phone number', 'error');
-      return;
-    }
-
     showStatus('Opening WhatsApp…', 'ok');
-    const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(buildText())}`;
-    window.open(waUrl, '_blank', 'noopener,noreferrer');
-    setTimeout(() => form.reset(), 300);
+    window.open(
+      `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(buildMsg())}`,
+      '_blank'
+    );
+    setTimeout(() => form.reset(), 400);
   });
 
   if (emailBtn) {
-    emailBtn.addEventListener('click', (e) => {
+    emailBtn.addEventListener('click', e => {
       e.preventDefault();
       window.location.href =
-        `mailto:${CONFIG.email}?subject=${encodeURIComponent('Booking Request')}&body=${encodeURIComponent(buildText())}`;
+        `mailto:${CONFIG.email}?subject=Booking Request&body=${encodeURIComponent(buildMsg())}`;
     });
   }
 }
@@ -250,15 +220,33 @@ function setYear() {
 window.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initWhatsApp();
-  initContactForm();
   renderSummary();
+  initContactForm();
   setYear();
 
-  // attach home search
+  // Search form
   const form = document.getElementById('searchForm');
   if (form) form.addEventListener('submit', handleSearchSubmit);
 
-  // attach autocomplete on home page if suggestion boxes exist
+  // Autocomplete
   attachAutocomplete('src', 'srcSuggestions');
   attachAutocomplete('dst', 'dstSuggestions');
+
+  // TODAY / TOMORROW BUTTONS (FIXED)
+  const dateInput = document.getElementById('date');
+  const btnToday = document.getElementById('btnToday');
+  const btnTomorrow = document.getElementById('btnTomorrow');
+
+  if (btnToday && dateInput) {
+    btnToday.addEventListener('click', () => {
+      dateInput.value = new Date().toISOString().slice(0, 10);
+    });
+  }
+
+  if (btnTomorrow && dateInput) {
+    btnTomorrow.addEventListener('click', () => {
+      const d = new Date(Date.now() + 86400000);
+      dateInput.value = d.toISOString().slice(0, 10);
+    });
+  }
 });
