@@ -15,9 +15,16 @@
 
 <body>
 
+<!-- HEADER (WITH LOGO IMAGE) -->
 <header class="site-header">
   <div class="container header-inner">
-    <a class="logo" href="home.html">Naveen <span>Tours & Travels</span></a>
+
+    <a class="logo logo-wrap" href="home.html" aria-label="Naveen Tours & Travels">
+      <img src="assets/img/logo.png" alt="Naveen Tours & Travels Logo" class="site-logo">
+      <span class="brand-text">
+        Naveen <span class="brand-sub">Tours & Travels</span>
+      </span>
+    </a>
 
     <nav class="nav" aria-label="Primary">
       <a href="home.html">Home</a>
@@ -30,9 +37,11 @@
       <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
       <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
     </div>
+
   </div>
 </header>
 
+<!-- PAGE HEADER -->
 <section class="page-header">
   <div class="container">
     <h1>Contact & Booking</h1>
@@ -40,10 +49,11 @@
   </div>
 </section>
 
+<!-- CONTACT CONTENT -->
 <section class="contact">
   <div class="container contact-grid">
 
-    <!-- Reach Us -->
+    <!-- REACH US -->
     <div class="card">
       <h3>Reach Us</h3>
 
@@ -76,7 +86,7 @@
       </div>
     </div>
 
-    <!-- Booking Form -->
+    <!-- BOOKING FORM -->
     <div class="card">
       <h3>Quick Booking Form</h3>
       <p class="muted">We’ll reply quickly on WhatsApp.</p>
@@ -86,21 +96,13 @@
         <div class="form-row">
           <label>
             Full Name
-            <input type="text" id="cfName" placeholder="Your name" required autocomplete="name">
+            <input type="text" id="cfName" placeholder="Your name" required>
           </label>
 
           <label>
             Phone Number
-            <input
-              type="tel"
-              id="cfPhone"
-              placeholder="9492842937"
-              inputmode="numeric"
-              maxlength="10"
-              pattern="[0-9]{10}"
-              required
-              autocomplete="tel"
-            >
+            <input type="tel" id="cfPhone" placeholder="9492842937"
+              inputmode="numeric" maxlength="10" pattern="[0-9]{10}" required>
           </label>
         </div>
 
@@ -138,13 +140,12 @@
           <a id="emailFallback" class="btn secondary" href="#">Send via Email</a>
         </div>
 
-        <!-- Status message shows here (JS will fill it) -->
         <div id="formStatus" class="form-status" style="display:none;"></div>
 
       </form>
     </div>
 
-    <!-- Location Map (Back again ✅) -->
+    <!-- MAP -->
     <div class="card">
       <h3>Our Location</h3>
       <p class="muted">Tap the map to open directions.</p>
@@ -153,8 +154,7 @@
         <iframe
           title="Naveen Tours & Travels Location"
           src="https://www.google.com/maps?q=R%26B%20Centre,%20Dachepalli,%20522414,%20Palnadu%20District,%20Andhra%20Pradesh&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
+          loading="lazy">
         </iframe>
       </div>
     </div>
@@ -162,6 +162,7 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="site-footer">
   <div class="container footer-inner">
     <p>© <span id="year"></span> Naveen Tours & Travels • All rights reserved.</p>
@@ -172,7 +173,7 @@
   </div>
 </footer>
 
-<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">💬</a>
+<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener">💬</a>
 
 </body>
 </html>
