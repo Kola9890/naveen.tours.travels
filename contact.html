@@ -36,24 +36,26 @@
 <section class="page-header">
   <div class="container">
     <h1>Contact & Booking</h1>
-    <p class="muted">Call, WhatsApp, or visit us. We’re happy to help with your trip.</p>
+    <p class="muted">Call, WhatsApp, or send a quick request form. We’ll reply fast.</p>
   </div>
 </section>
 
 <section class="contact">
   <div class="container contact-grid">
+
+    <!-- Reach Us -->
     <div class="card">
       <h3>Reach Us</h3>
       <ul class="contact-list">
         <li><strong>Business:</strong> Naveen Tours & Travels</li>
         <li>
           <strong>Phone / WhatsApp:</strong>
-          <a href="tel:+919492843937">+91 9492842937</a>
+          <a id="phoneLink" href="tel:+919492843937">+91 9492842937</a>
         </li>
         <li>
           <strong>Email:</strong>
-          <a href="mailto:info.naveen.tours.travels@gmail.com">
-            info.naveen.tours.travels@gmail.com
+          <a id="emailLink" href="mailto:info.naveentoursandtravels@gmail.com">
+            info.naveentoursandtravels@gmail.com
           </a>
         </li>
         <li>
@@ -69,6 +71,65 @@
       </div>
     </div>
 
+    <!-- Quick Booking Form -->
+    <div class="card">
+      <h3>Quick Booking Request</h3>
+      <p class="muted">Fill this form and we’ll get back to you quickly on WhatsApp.</p>
+
+      <form id="contactForm" class="contact-form">
+        <div class="form-row">
+          <label>
+            Full Name
+            <input type="text" id="cfName" placeholder="Your name" required />
+          </label>
+
+          <label>
+            Phone Number
+            <input type="tel" id="cfPhone" placeholder="+91 9XXXXXXXXX" required />
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            Pickup (From)
+            <input type="text" id="cfFrom" placeholder="e.g., Dachepalli" required />
+          </label>
+
+          <label>
+            Drop (To)
+            <input type="text" id="cfTo" placeholder="e.g., Guntur" required />
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            Travel Date
+            <input type="date" id="cfDate" required />
+          </label>
+
+          <label>
+            Vehicle (optional)
+            <input type="text" id="cfVehicle" placeholder="e.g., Swift Dzire / Ertiga" />
+          </label>
+        </div>
+
+        <label>
+          Message (optional)
+          <textarea id="cfMsg" rows="4" placeholder="Any special request…"></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Send on WhatsApp</button>
+          <a id="emailFallback" class="btn secondary" href="#" rel="noopener">Send via Email</a>
+        </div>
+
+        <p class="muted small" id="formHint">
+          Tip: WhatsApp is fastest for quotes. Email is optional backup.
+        </p>
+      </form>
+    </div>
+
+    <!-- Location -->
     <div class="card">
       <h3>Location</h3>
       <p class="muted">Tap the map to open directions in Google Maps.</p>
@@ -81,6 +142,7 @@
         </iframe>
       </div>
     </div>
+
   </div>
 </section>
 
