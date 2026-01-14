@@ -19,6 +19,7 @@
 <header class="site-header">
   <div class="container header-inner">
 
+    <!-- LOGO -->
     <a class="logo logo-wrap" href="home.html" aria-label="Naveen Tours & Travels">
       <img src="assets/img/logo.png" alt="Naveen Tours & Travels Logo" class="site-logo">
       <span class="brand-text">
@@ -26,6 +27,7 @@
       </span>
     </a>
 
+    <!-- NAV -->
     <nav class="nav" aria-label="Primary">
       <a href="home.html" aria-current="page">Home</a>
       <a href="results.html">Results</a>
@@ -33,8 +35,16 @@
       <a href="about.html">About</a>
     </nav>
 
+    <!-- ACTION BUTTONS -->
     <div class="header-actions">
       <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
+
+      <!-- CALL BUTTON -->
+      <a class="cta call" href="tel:+919492842937" aria-label="Call Naveen Tours">
+        📞 Call
+      </a>
+
+      <!-- WHATSAPP -->
       <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">
         WhatsApp
       </a>
@@ -56,7 +66,7 @@
 
     <!-- SEARCH CARD -->
     <div class="pill-card card">
-      <form id="searchForm" onsubmit="return onSearchSubmit(event);" class="pill-grid">
+      <form id="searchForm" class="pill-grid">
 
         <label class="pill-item with-icon">
           <span class="label">Leaving From</span>
@@ -138,14 +148,6 @@
   </div>
 </section>
 
-<!-- OFFERS -->
-<section class="offers">
-  <div class="container">
-    <h2>Discount Offers</h2>
-    <p class="muted">Seasonal discounts available. Ask on WhatsApp.</p>
-  </div>
-</section>
-
 <!-- FOOTER -->
 <footer class="site-footer">
   <div class="container footer-inner">
@@ -157,15 +159,13 @@
   </div>
 </footer>
 
+<!-- FLOATING CALL -->
+<a class="floating-call" href="tel:+919492842937" aria-label="Call Naveen Tours">
+  📞
+</a>
+
 <!-- FLOATING WHATSAPP -->
-<a
-  class="floating-whatsapp"
-  id="waFloat"
-  href="#"
-  target="_blank"
-  rel="noopener"
-  aria-label="WhatsApp chat"
->
+<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">
   💬
 </a>
 
