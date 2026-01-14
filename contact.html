@@ -5,7 +5,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Contact and booking details — Naveen Tours & Travels" />
+  <meta name="description" content="Contact and booking — Naveen Tours & Travels" />
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,52 +15,66 @@
 
 <body>
 
+<!-- HEADER -->
 <header class="site-header">
   <div class="container header-inner">
-    <a class="logo" href="index.html">Naveen <span>Tours & Travels</span></a>
+    <a class="logo" href="index.html">
+      Naveen <span>Tours & Travels</span>
+    </a>
 
     <nav class="nav" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="results.html">Results</a>
-      <a href="contact.html">Contact</a>
+      <a href="contact.html" aria-current="page">Contact</a>
       <a href="about.html">About</a>
     </nav>
 
     <div class="header-actions">
       <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
-      <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">
+        WhatsApp
+      </a>
     </div>
   </div>
 </header>
 
+<!-- PAGE HEADER -->
 <section class="page-header">
   <div class="container">
     <h1>Contact & Booking</h1>
-    <p class="muted">Call, WhatsApp, or send a quick request form. We’ll reply fast.</p>
+    <p class="muted">
+      Call, WhatsApp, or send a booking request form. We respond quickly.
+    </p>
   </div>
 </section>
 
+<!-- CONTACT SECTION -->
 <section class="contact">
   <div class="container contact-grid">
 
-    <!-- Reach Us -->
+    <!-- CONTACT DETAILS -->
     <div class="card">
       <h3>Reach Us</h3>
+
       <ul class="contact-list">
         <li><strong>Business:</strong> Naveen Tours & Travels</li>
+
         <li>
           <strong>Phone / WhatsApp:</strong>
-          <a id="phoneLink" href="tel:+919492843937">+91 9492842937</a>
+          <a href="tel:+919492842937">+91 9492842937</a>
         </li>
+
         <li>
           <strong>Email:</strong>
-          <a id="emailLink" href="mailto:info.naveentoursandtravels@gmail.com">
+          <a href="mailto:info.naveentoursandtravels@gmail.com">
             info.naveentoursandtravels@gmail.com
           </a>
         </li>
+
         <li>
           <strong>Address:</strong>
-          R&amp;B Centre, Dachepalli, 522414, Palnadu District, Andhra Pradesh
+          R&amp;B Centre, Dachepalli, 522414,<br>
+          Palnadu District, Andhra Pradesh
         </li>
       </ul>
 
@@ -71,12 +85,15 @@
       </div>
     </div>
 
-    <!-- Quick Booking Form -->
+    <!-- BOOKING FORM -->
     <div class="card">
       <h3>Quick Booking Request</h3>
-      <p class="muted">Fill this form and we’ll get back to you quickly on WhatsApp.</p>
+      <p class="muted">
+        Fill this form and we’ll get back to you on WhatsApp.
+      </p>
 
       <form id="contactForm" class="contact-form">
+
         <div class="form-row">
           <label>
             Full Name
@@ -85,7 +102,7 @@
 
           <label>
             Phone Number
-            <input type="tel" id="cfPhone" placeholder="+91 9XXXXXXXXX" required />
+            <input type="tel" id="cfPhone" placeholder="9492842937" required />
           </label>
         </div>
 
@@ -109,7 +126,7 @@
 
           <label>
             Vehicle (optional)
-            <input type="text" id="cfVehicle" placeholder="e.g., Swift Dzire / Ertiga" />
+            <input type="text" id="cfVehicle" placeholder="Swift Dzire / Ertiga" />
           </label>
         </div>
 
@@ -119,20 +136,26 @@
         </label>
 
         <div class="form-actions">
-          <button type="submit" class="btn primary">Send on WhatsApp</button>
-          <a id="emailFallback" class="btn secondary" href="#" rel="noopener">Send via Email</a>
+          <button type="submit" class="btn primary">
+            Send on WhatsApp
+          </button>
+
+          <a id="emailFallback" class="btn secondary" href="#">
+            Send via Email
+          </a>
         </div>
 
-        <p class="muted small" id="formHint">
-          Tip: WhatsApp is fastest for quotes. Email is optional backup.
+        <p class="muted small">
+          WhatsApp is fastest for quotes. Email is optional backup.
         </p>
       </form>
     </div>
 
-    <!-- Location -->
+    <!-- MAP -->
     <div class="card">
-      <h3>Location</h3>
-      <p class="muted">Tap the map to open directions in Google Maps.</p>
+      <h3>Our Location</h3>
+      <p class="muted">Tap the map to open directions.</p>
+
       <div class="map-embed">
         <iframe
           title="Naveen Tours & Travels Location"
@@ -146,9 +169,13 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© <span id="year"></span> Naveen Tours & Travels • All rights reserved.</p>
+    <p>
+      © <span id="year"></span> Naveen Tours & Travels • All rights reserved.
+    </p>
+
     <div class="footer-links">
       <a href="contact.html">Contact</a>
       <a href="about.html">About</a>
@@ -156,7 +183,15 @@
   </div>
 </footer>
 
-<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">
+<!-- FLOATING WHATSAPP -->
+<a
+  class="floating-whatsapp"
+  id="waFloat"
+  href="#"
+  target="_blank"
+  rel="noopener"
+  aria-label="WhatsApp chat"
+>
   💬
 </a>
 
