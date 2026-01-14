@@ -238,3 +238,19 @@ a{ color:var(--primary); text-decoration:none }
 @media(max-width:600px){
   .form-row{ grid-template-columns:1fr; }
 }
+.form-status{
+  margin-top:.8rem;
+  padding:.7rem .9rem;
+  border-radius:12px;
+  border:1px solid var(--border);
+  font-weight:600;
+  display:none;
+}
+
+.form-status.ok{
+  background: rgba(34, 197, 94, .12);
+}
+
+.form-status.error{
+  background: rgba(239, 68, 68, .12);
+}
