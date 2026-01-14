@@ -5,7 +5,8 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Naveen Tours & Travels — Friendly site with offers slider, Places Autocomplete, dark mode, and vehicle preview." />
+  <meta name="description" content="Naveen Tours & Travels — City & outstation cab services across India." />
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css" />
@@ -14,150 +15,138 @@
 
 <body>
 
+<!-- HEADER -->
 <header class="site-header">
   <div class="container header-inner">
-    <a class="logo" href="home.html">Naveen <span>Tours & Travels</span></a>
+
+    <a class="logo logo-wrap" href="home.html" aria-label="Naveen Tours & Travels">
+      <img src="assets/img/logo.png" alt="Naveen Tours & Travels Logo" class="site-logo">
+      <span class="brand-text">
+        Naveen <span class="brand-sub">Tours & Travels</span>
+      </span>
+    </a>
+
     <nav class="nav" aria-label="Primary">
-      <a href="home.html">Home</a>
+      <a href="home.html" aria-current="page">Home</a>
       <a href="results.html">Results</a>
       <a href="contact.html">Contact</a>
       <a href="about.html">About</a>
     </nav>
+
     <div class="header-actions">
       <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
-      <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">
+        WhatsApp
+      </a>
     </div>
+
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <div class="container">
+
     <div class="hero-top">
       <h1>Book Comfortable City & Outstation Cabs</h1>
-      <p class="muted">Pan-India service • Friendly experience • Quick WhatsApp quotes</p>
+      <p class="muted">
+        Pan-India service • Reliable drivers • Instant WhatsApp quotes
+      </p>
     </div>
 
+    <!-- SEARCH CARD -->
     <div class="pill-card card">
       <form id="searchForm" onsubmit="return onSearchSubmit(event);" class="pill-grid">
+
         <label class="pill-item with-icon">
           <span class="label">Leaving From</span>
-          <span class="icon"><img src="assets/img/pin.svg" alt="pin" /></span>
-
-          <!-- Wrappers for Google Places element if enabled -->
-          <span id="srcWrap"></span>
-
-          <input list="cityList" type="text" id="src" placeholder="e.g., Dachepalli" required />
+          <span class="icon"><img src="assets/img/pin.svg" alt=""></span>
+          <input list="cityList" type="text" id="src" placeholder="e.g., Dachepalli" required>
         </label>
 
         <label class="pill-item with-icon">
           <span class="label">Going To</span>
-          <span class="icon"><img src="assets/img/pin.svg" alt="pin" /></span>
-
-          <span id="dstWrap"></span>
-
-          <input list="cityList" type="text" id="dst" placeholder="e.g., Guntur" required />
+          <span class="icon"><img src="assets/img/pin.svg" alt=""></span>
+          <input list="cityList" type="text" id="dst" placeholder="e.g., Guntur" required>
         </label>
 
         <label class="pill-item with-icon">
           <span class="label">Departure</span>
-          <span class="icon"><img src="assets/img/calendar.svg" alt="calendar" /></span>
-          <input type="date" id="date" placeholder="mm/dd/yyyy" required />
+          <span class="icon"><img src="assets/img/calendar.svg" alt=""></span>
+          <input type="date" id="date" required>
         </label>
 
         <label class="pill-item with-icon">
           <span class="label">Vehicle</span>
-          <span class="icon"><img src="assets/img/car.svg" alt="car" /></span>
+          <span class="icon"><img src="assets/img/car.svg" alt=""></span>
           <select id="vehicle">
-            <option value="" selected>None</option>
-            <option value="Swift Dzire">Swift Dzire</option>
-            <option value="Etios">Etios</option>
-            <option value="Ertiga">Ertiga</option>
-            <option value="Scorpio">Scorpio</option>
-            <option value="TATA Winger">TATA Winger</option>
-            <option value="Toofan (Force)">Toofan (Force)</option>
-            <option value="Force Urbania">Force Urbania</option>
+            <option value="">Any</option>
+            <option>Swift Dzire</option>
+            <option>Etios</option>
+            <option>Ertiga</option>
+            <option>Scorpio</option>
+            <option>TATA Winger</option>
+            <option>Force Urbania</option>
           </select>
         </label>
 
         <div class="pill-actions">
           <div class="quick">
-            <span class="chip muted">Today / Tomorrow</span>
+            <span class="chip muted">Quick date</span>
             <button type="button" class="chip" onclick="setToday()">Today</button>
             <button type="button" class="chip" onclick="setTomorrow()">Tomorrow</button>
           </div>
           <button class="btn search" type="submit">Search →</button>
         </div>
+
       </form>
 
       <datalist id="cityList">
-        <option value="Dachepalli"></option>
-        <option value="Guntur"></option>
-        <option value="Hyderabad"></option>
-        <option value="Vijayawada"></option>
-        <option value="Visakhapatnam"></option>
-        <option value="Bengaluru"></option>
-        <option value="Chennai"></option>
-        <option value="Mumbai"></option>
-        <option value="Pune"></option>
-        <option value="Delhi"></option>
+        <option>Dachepalli</option>
+        <option>Guntur</option>
+        <option>Hyderabad</option>
+        <option>Vijayawada</option>
+        <option>Visakhapatnam</option>
+        <option>Bengaluru</option>
+        <option>Chennai</option>
+        <option>Mumbai</option>
+        <option>Pune</option>
+        <option>Delhi</option>
       </datalist>
     </div>
 
-    <div id="vehiclePreview" class="card vehicle-preview" style="display:none;">
-      <div class="vehicle-preview-inner">
-        <img id="vehicleImg" alt="Vehicle preview" />
-        <div>
-          <h3 id="vehicleTitle">Vehicle</h3>
-          <p class="muted small">Preview image sourced online. Replace with your own photo URLs anytime.</p>
-        </div>
-      </div>
-    </div>
-
+    <!-- FEATURES -->
     <div class="hero-art space">
       <div class="grid hero-feature">
-        <div class="card accent1"><h3>Outstation Trips</h3><p class="muted">Weekend getaways, intercity travel, airport transfers.</p></div>
-        <div class="card accent2"><h3>Transparent Pricing</h3><p class="muted">Indicative estimates; final quote on WhatsApp.</p></div>
-        <div class="card accent3"><h3>Reliable Drivers</h3><p class="muted">Safety-first, courteous, and on-time.</p></div>
+        <div class="card accent1">
+          <h3>Outstation Trips</h3>
+          <p class="muted">Weekend trips, airport rides, long-distance travel.</p>
+        </div>
+
+        <div class="card accent2">
+          <h3>Transparent Pricing</h3>
+          <p class="muted">No hidden charges. Final quote on WhatsApp.</p>
+        </div>
+
+        <div class="card accent3">
+          <h3>Reliable Drivers</h3>
+          <p class="muted">Experienced, polite, and on-time drivers.</p>
+        </div>
       </div>
     </div>
+
   </div>
 </section>
 
+<!-- OFFERS -->
 <section class="offers">
   <div class="container">
-    <div class="offers-head">
-      <h2>Discount Offers</h2>
-      <div class="carousel-controls">
-        <button class="carousel-btn" id="offerPrev" aria-label="Previous">‹</button>
-        <button class="carousel-btn" id="offerNext" aria-label="Next">›</button>
-        <button class="link-btn" id="toggleEditor" aria-label="Edit">✎ Edit</button>
-      </div>
-    </div>
-
-    <div class="offer-slider" id="offerSlider">
-      <div class="offer-track" id="offerTrack"></div>
-      <div class="offer-dots" id="offerDots"></div>
-    </div>
-
-    <div class="card coupon-editor" id="couponEditor" hidden>
-      <h3>Coupon Editor</h3>
-      <p class="muted small">Save one coupon to your browser. Reload to apply.</p>
-
-      <form id="couponForm" onsubmit="return false;" class="coupon-grid">
-        <label>Title<input type="text" id="cTitle" placeholder="e.g., Flat 10% Off" /></label>
-        <label>Code<input type="text" id="cCode" placeholder="e.g., NEWUSER10" /></label>
-        <label>Description<input type="text" id="cDesc" placeholder="e.g., Limited time offer" /></label>
-
-        <div class="editor-actions">
-          <button class="btn primary" id="saveSingleCoupon" type="button">Save Coupon</button>
-        </div>
-      </form>
-
-      <div id="couponList" class="grid"></div>
-    </div>
+    <h2>Discount Offers</h2>
+    <p class="muted">Seasonal discounts available. Ask on WhatsApp.</p>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="site-footer">
   <div class="container footer-inner">
     <p>© <span id="year"></span> Naveen Tours & Travels • All rights reserved.</p>
@@ -168,7 +157,17 @@
   </div>
 </footer>
 
-<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">💬</a>
+<!-- FLOATING WHATSAPP -->
+<a
+  class="floating-whatsapp"
+  id="waFloat"
+  href="#"
+  target="_blank"
+  rel="noopener"
+  aria-label="WhatsApp chat"
+>
+  💬
+</a>
 
 </body>
 </html>
