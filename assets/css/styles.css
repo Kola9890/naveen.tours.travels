@@ -208,3 +208,33 @@ a{ color:var(--primary); text-decoration:none }
   .grid{ grid-template-columns:1fr }
   .form-row{ grid-template-columns:1fr }
 }
+.contact-form label{
+  display:flex;
+  flex-direction:column;
+  gap:.3rem;
+  font-weight:600;
+}
+
+.contact-form input,
+.contact-form textarea{
+  padding:.6rem;
+  border:1px solid #ccc;
+  border-radius:8px;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.8rem;
+  margin-bottom:.8rem;
+}
+
+.form-actions{
+  display:flex;
+  gap:.6rem;
+  margin-top:.8rem;
+}
+
+@media(max-width:600px){
+  .form-row{ grid-template-columns:1fr; }
+}
