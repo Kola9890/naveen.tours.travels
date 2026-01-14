@@ -15,10 +15,11 @@
 
 <body>
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
 <header class="site-header">
   <div class="container header-inner">
 
+    <!-- LOGO -->
     <a class="logo logo-wrap" href="home.html" aria-label="Naveen Tours & Travels">
       <img src="assets/img/logo.png" alt="Naveen Tours & Travels Logo" class="site-logo">
       <span class="brand-text">
@@ -26,6 +27,7 @@
       </span>
     </a>
 
+    <!-- NAV -->
     <nav class="nav" aria-label="Primary">
       <a href="home.html" aria-current="page">Home</a>
       <a href="results.html">Results</a>
@@ -33,6 +35,7 @@
       <a href="about.html">About</a>
     </nav>
 
+    <!-- ACTIONS -->
     <div class="header-actions">
       <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
       <a class="cta call" href="tel:+919492842937" aria-label="Call Naveen Tours">📞 Call</a>
@@ -42,7 +45,7 @@
   </div>
 </header>
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 <section class="hero">
   <div class="container">
 
@@ -51,7 +54,7 @@
       <p class="muted">Pan-India service • Reliable drivers • Instant WhatsApp quotes</p>
     </div>
 
-    <!-- SEARCH CARD -->
+    <!-- ================= SEARCH CARD ================= -->
     <div class="pill-card card">
       <form id="searchForm" class="pill-grid">
 
@@ -71,7 +74,7 @@
           <div class="suggestions" id="dstSuggestions"></div>
         </div>
 
-        <!-- Departure -->
+        <!-- Date -->
         <label class="pill-item with-icon">
           <span class="label">Departure</span>
           <span class="icon"><img src="assets/img/calendar.svg" alt=""></span>
@@ -93,11 +96,11 @@
           </select>
         </label>
 
-        <!-- Actions -->
+        <!-- ACTION BUTTONS -->
         <div class="pill-actions">
           <div class="quick">
-            <button type="button" class="chip" onclick="setToday()">Today</button>
-            <button type="button" class="chip" onclick="setTomorrow()">Tomorrow</button>
+            <button type="button" class="chip" id="btnToday">Today</button>
+            <button type="button" class="chip" id="btnTomorrow">Tomorrow</button>
           </div>
           <button class="btn search" type="submit">Search →</button>
         </div>
@@ -105,7 +108,7 @@
       </form>
     </div>
 
-    <!-- FEATURES -->
+    <!-- ================= FEATURES ================= -->
     <div class="hero-art space">
       <div class="grid hero-feature">
         <div class="card accent1">
@@ -126,7 +129,7 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
     <p>© <span id="year"></span> Naveen Tours & Travels • All rights reserved.</p>
@@ -137,7 +140,7 @@
   </div>
 </footer>
 
-<!-- FLOATING BUTTONS -->
+<!-- ================= FLOATING BUTTONS ================= -->
 <a class="floating-call" href="tel:+919492842937" aria-label="Call Naveen Tours">📞</a>
 <a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">💬</a>
 
