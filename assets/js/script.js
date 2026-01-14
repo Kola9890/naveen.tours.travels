@@ -1,4 +1,4 @@
-/* Naveen Tours & Travels - script.js (with custom autocomplete) */
+/* Naveen Tours & Travels - script.js (FINAL) */
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
@@ -7,7 +7,7 @@ const CONFIG = {
   avgSpeedKmph: 45,
 };
 
-/* THEME */
+/* ================= THEME ================= */
 function initTheme() {
   const saved = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', saved);
@@ -23,19 +23,20 @@ function initTheme() {
   };
 }
 
-/* TODAY / TOMORROW */
+/* ================= DATE SHORTCUTS ================= */
 function setToday() {
   const d = document.getElementById('date');
   if (!d) return;
   d.value = new Date().toISOString().slice(0, 10);
 }
+
 function setTomorrow() {
   const d = document.getElementById('date');
   if (!d) return;
   d.value = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
 }
 
-/* WHATSAPP LINKS */
+/* ================= WHATSAPP ================= */
 function initWhatsApp() {
   const msg = encodeURIComponent(`Hi ${CONFIG.owner}, I would like to enquire about cabs.`);
   const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`;
@@ -50,7 +51,8 @@ function initWhatsApp() {
   if (waContact) waContact.href = url;
 }
 
-/* CUSTOM AUTOCOMPLETE DATA (sample list — you can extend) */
+/* ================= AUTOCOMPLETE DATA ================= */
+/* You can keep expanding this list */
 const INDIA_PLACES = [
   "Dachepalli","Guntur","Hyderabad","Vijayawada","Visakhapatnam",
   "Bengaluru","Chennai","Mumbai","Pune","Delhi","Kolkata","Jaipur",
@@ -61,7 +63,7 @@ const INDIA_PLACES = [
   "Patna","Ranchi","Lucknow","Kanpur","Noida","Gurugram"
 ];
 
-/* Attach autocomplete to an input */
+/* ================= AUTOCOMPLETE (FIXED CLICK ISSUE) ================= */
 function attachAutocomplete(inputId, boxId) {
   const input = document.getElementById(inputId);
   const box = document.getElementById(boxId);
@@ -94,22 +96,34 @@ function attachAutocomplete(inputId, boxId) {
       const div = document.createElement('div');
       div.className = 'item';
       div.textContent = place;
-      div.addEventListener('click', () => {
+
+      // ✅ mousedown works before blur (FIX)
+      div.addEventListener('mousedown', (e) => {
+        e.preventDefault();
         input.value = place;
         hide();
       });
+
       box.appendChild(div);
     });
 
     box.style.display = 'block';
   });
 
-  input.addEventListener('blur', () => {
-    setTimeout(hide, 120);
+  // close only when clicking outside
+  document.addEventListener('mousedown', (e) => {
+    if (!box.contains(e.target) && e.target !== input) {
+      hide();
+    }
+  });
+
+  // ESC closes list
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') hide();
   });
 }
 
-/* HOME SEARCH -> RESULTS */
+/* ================= SEARCH → RESULTS ================= */
 function handleSearchSubmit(e) {
   e.preventDefault();
 
@@ -127,7 +141,7 @@ function handleSearchSubmit(e) {
   window.location.assign('results.html');
 }
 
-/* DISTANCE + RESULTS SUMMARY */
+/* ================= RESULTS SUMMARY ================= */
 const CITY_COORDS = {
   Dachepalli: [16.6, 79.7333],
   Guntur: [16.3067, 80.4365],
@@ -139,25 +153,28 @@ const CITY_COORDS = {
   Mumbai: [19.076, 72.8777],
   Pune: [18.5204, 73.8567],
   Delhi: [28.6139, 77.209],
-  Kolkata: [22.5726, 88.3639],
-  Jaipur: [26.9124, 75.7873],
 };
 
 function normalizeCity(s) {
   return (s || '').split(',')[0].trim();
 }
+
 function haversine(a, b) {
   const R = 6371;
-  const toRad = (d) => (d * Math.PI) / 180;
+  const toRad = d => (d * Math.PI) / 180;
   const dLat = toRad(b[0] - a[0]);
   const dLon = toRad(b[1] - a[1]);
+
   const A =
     Math.sin(dLat / 2) ** 2 +
-    Math.cos(toRad(a[0])) * Math.cos(toRad(b[0])) *
-    Math.sin(dLon / 2) ** 2;
+    Math.cos(toRad(a[0])) *
+      Math.cos(toRad(b[0])) *
+      Math.sin(dLon / 2) ** 2;
+
   const C = 2 * Math.atan2(Math.sqrt(A), Math.sqrt(1 - A));
   return R * C;
 }
+
 function escapeHTML(str) {
   return String(str ?? '')
     .replaceAll('&', '&amp;')
@@ -179,8 +196,7 @@ function renderSummary() {
 
   const dist = a && b ? Math.round(haversine(a, b)) : null;
   const eta = dist ? (dist / CONFIG.avgSpeedKmph) : null;
-
-  const vehicleText = data.vehicle ? data.vehicle : 'Not specified';
+  const vehicleText = data.vehicle || 'Not specified';
 
   box.innerHTML = `
     <h3>Trip Summary</h3>
@@ -191,31 +207,9 @@ function renderSummary() {
     <p><strong>Distance:</strong> ${dist ? dist + ' km' : '—'}</p>
     <p><strong>ETA:</strong> ${eta ? eta.toFixed(1) + ' hrs' : '—'}</p>
   `;
-
-  const msg = encodeURIComponent(
-    `Hi ${CONFIG.owner},
-Ride Enquiry
-From: ${data.src || '—'}
-To: ${data.dst || '—'}
-Date: ${data.date || '—'}
-Vehicle: ${vehicleText}
-Distance: ${dist ? dist + ' km' : '—'}
-ETA: ${eta ? eta.toFixed(1) + ' hrs' : '—'}`
-  );
-
-  const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`;
-  const waBtn = document.getElementById('waQuote');
-  if (waBtn) waBtn.onclick = () => window.open(waUrl, '_blank', 'noopener,noreferrer');
-
-  const gmaps = document.getElementById('gmapsDir');
-  if (gmaps) {
-    gmaps.href = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(
-      data.src || ''
-    )}&destination=${encodeURIComponent(data.dst || '')}&travelmode=driving`;
-  }
 }
 
-/* CONTACT FORM */
+/* ================= CONTACT FORM ================= */
 function initContactForm() {
   const form = document.getElementById('contactForm');
   if (!form) return;
@@ -223,65 +217,61 @@ function initContactForm() {
   const emailBtn = document.getElementById('emailFallback');
   const status = document.getElementById('formStatus');
 
-  const get = (id) => (document.getElementById(id)?.value || '').trim();
-  const digitsOnly = (s) => (s || '').replace(/\D/g, '');
+  const get = id => (document.getElementById(id)?.value || '').trim();
+  const digitsOnly = s => (s || '').replace(/\D/g, '');
 
   function showStatus(text, type) {
     if (!status) return;
     status.textContent = text;
-    status.classList.remove('ok', 'error');
-    status.classList.add(type);
+    status.className = `form-status ${type}`;
     status.style.display = 'block';
   }
 
   function buildText() {
     return `Hi ${CONFIG.owner},
-New Booking Request
 Name: ${get('cfName')}
 Phone: ${get('cfPhone')}
 From: ${get('cfFrom')}
 To: ${get('cfTo')}
 Date: ${get('cfDate')}
-Vehicle: ${get('cfVehicle') || 'Not specified'}
+Vehicle: ${get('cfVehicle') || '—'}
 Message: ${get('cfMsg') || '—'}`;
   }
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', e => {
     e.preventDefault();
     const phone = digitsOnly(get('cfPhone'));
-    if (!(phone.length === 10 || (phone.length === 12 && phone.startsWith('91')))) {
-      showStatus('Please enter a valid 10-digit phone number.', 'error');
+
+    if (phone.length !== 10) {
+      showStatus('Enter valid 10-digit phone number', 'error');
       return;
     }
-    showStatus('Opening WhatsApp… Please tap Send in WhatsApp.', 'ok');
-    window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(buildText())}`, '_blank', 'noopener,noreferrer');
+
+    showStatus('Opening WhatsApp…', 'ok');
+    window.open(
+      `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(buildText())}`,
+      '_blank',
+      'noopener,noreferrer'
+    );
     setTimeout(() => form.reset(), 300);
   });
 
   if (emailBtn) {
-    emailBtn.addEventListener('click', (e) => {
+    emailBtn.onclick = e => {
       e.preventDefault();
-      const phone = digitsOnly(get('cfPhone'));
-      if (!(phone.length === 10 || (phone.length === 12 && phone.startsWith('91')))) {
-        showStatus('Please enter a valid phone number before emailing.', 'error');
-        return;
-      }
-      showStatus('Opening email…', 'ok');
       window.location.href =
-        `mailto:${CONFIG.email}` +
-        `?subject=${encodeURIComponent('Booking Request - Naveen Tours & Travels')}` +
-        `&body=${encodeURIComponent(buildText())}`;
-    });
+        `mailto:${CONFIG.email}?subject=Booking Request&body=${encodeURIComponent(buildText())}`;
+    };
   }
 }
 
-/* YEAR */
+/* ================= YEAR ================= */
 function setYear() {
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 }
 
-/* INIT */
+/* ================= INIT ================= */
 window.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initWhatsApp();
@@ -289,11 +279,9 @@ window.addEventListener('DOMContentLoaded', () => {
   renderSummary();
   setYear();
 
-  // Attach search submit if present
   const form = document.getElementById('searchForm');
   if (form) form.addEventListener('submit', handleSearchSubmit);
 
-  // Attach autocomplete if inputs exist
   attachAutocomplete('src', 'srcSuggestions');
   attachAutocomplete('dst', 'dstSuggestions');
 });
