@@ -19,16 +19,16 @@
   <div class="container header-inner">
     <a class="logo" href="index.html">Naveen <span>Tours & Travels</span></a>
 
-    <nav class="nav">
+    <nav class="nav" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="results.html">Results</a>
-      <a href="contact.html">Contact</a>
+      <a href="contact.html" aria-current="page">Contact</a>
       <a href="about.html">About</a>
     </nav>
 
     <div class="header-actions">
-      <button id="themeToggle" class="toggle">🌙</button>
-      <a class="cta whatsapp" id="waHeader" href="#" target="_blank">WhatsApp</a>
+      <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
+      <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </div>
 </header>
@@ -43,70 +43,94 @@
 <section class="contact">
   <div class="container contact-grid">
 
-    <!-- CONTACT DETAILS -->
+    <!-- Reach Us -->
     <div class="card">
       <h3>Reach Us</h3>
 
       <ul class="contact-list">
         <li><strong>Business:</strong> Naveen Tours & Travels</li>
-        <li><strong>Phone / WhatsApp:</strong>
+
+        <li>
+          <strong>Phone / WhatsApp:</strong>
           <a href="tel:+919492842937">+91 9492842937</a>
         </li>
-        <li><strong>Email:</strong>
+
+        <li>
+          <strong>Email:</strong>
           <a href="mailto:info.naveentoursandtravels@gmail.com">
             info.naveentoursandtravels@gmail.com
           </a>
         </li>
-        <li><strong>Address:</strong><br>
-          R&B Centre, Dachepalli – 522414<br>
+
+        <li>
+          <strong>Address:</strong><br>
+          R&amp;B Centre, Dachepalli – 522414<br>
           Palnadu District, Andhra Pradesh
         </li>
       </ul>
 
-      <a class="btn primary" id="waContact" href="#" target="_blank">
-        Chat on WhatsApp
-      </a>
+      <div class="cta-row">
+        <a class="btn primary" id="waContact" href="#" target="_blank" rel="noopener">
+          Chat on WhatsApp
+        </a>
+      </div>
     </div>
 
-    <!-- CONTACT FORM -->
+    <!-- Booking Form -->
     <div class="card">
       <h3>Quick Booking Form</h3>
       <p class="muted">We’ll reply quickly on WhatsApp.</p>
 
-      <form id="contactForm" class="contact-form">
+      <form id="contactForm" class="contact-form" autocomplete="on">
 
         <div class="form-row">
-          <label>Full Name
-            <input type="text" id="cfName" required>
+          <label>
+            Full Name
+            <input type="text" id="cfName" placeholder="Your name" required autocomplete="name">
           </label>
 
-          <label>Phone Number
-            <input type="tel" id="cfPhone" placeholder="9492842937" required>
+          <label>
+            Phone Number
+            <input
+              type="tel"
+              id="cfPhone"
+              placeholder="9492842937"
+              inputmode="numeric"
+              maxlength="10"
+              pattern="[0-9]{10}"
+              required
+              autocomplete="tel"
+            >
           </label>
         </div>
 
         <div class="form-row">
-          <label>From
-            <input type="text" id="cfFrom" required>
+          <label>
+            From
+            <input type="text" id="cfFrom" placeholder="e.g., Dachepalli" required>
           </label>
 
-          <label>To
-            <input type="text" id="cfTo" required>
+          <label>
+            To
+            <input type="text" id="cfTo" placeholder="e.g., Guntur" required>
           </label>
         </div>
 
         <div class="form-row">
-          <label>Travel Date
+          <label>
+            Travel Date
             <input type="date" id="cfDate" required>
           </label>
 
-          <label>Vehicle (optional)
-            <input type="text" id="cfVehicle">
+          <label>
+            Vehicle (optional)
+            <input type="text" id="cfVehicle" placeholder="Swift Dzire / Ertiga">
           </label>
         </div>
 
-        <label>Message
-          <textarea id="cfMsg" rows="4"></textarea>
+        <label>
+          Message (optional)
+          <textarea id="cfMsg" rows="4" placeholder="Any special request…"></textarea>
         </label>
 
         <div class="form-actions">
@@ -114,7 +138,25 @@
           <a id="emailFallback" class="btn secondary" href="#">Send via Email</a>
         </div>
 
+        <!-- Status message shows here (JS will fill it) -->
+        <div id="formStatus" class="form-status" style="display:none;"></div>
+
       </form>
+    </div>
+
+    <!-- Location Map (Back again ✅) -->
+    <div class="card">
+      <h3>Our Location</h3>
+      <p class="muted">Tap the map to open directions.</p>
+
+      <div class="map-embed">
+        <iframe
+          title="Naveen Tours & Travels Location"
+          src="https://www.google.com/maps?q=R%26B%20Centre,%20Dachepalli,%20522414,%20Palnadu%20District,%20Andhra%20Pradesh&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
     </div>
 
   </div>
@@ -122,11 +164,15 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© <span id="year"></span> Naveen Tours & Travels</p>
+    <p>© <span id="year"></span> Naveen Tours & Travels • All rights reserved.</p>
+    <div class="footer-links">
+      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a>
+    </div>
   </div>
 </footer>
 
-<a class="floating-whatsapp" id="waFloat" href="#" target="_blank">💬</a>
+<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">💬</a>
 
 </body>
 </html>
