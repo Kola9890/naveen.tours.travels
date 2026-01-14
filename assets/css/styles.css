@@ -302,3 +302,26 @@ a{ color:var(--primary); text-decoration:none }
   .grid{ grid-template-columns:1fr }
   .form-row{ grid-template-columns:1fr }
 }
+.cta.call{
+  background:#22c55e;
+  color:#052e15;
+  padding:.5rem .9rem;
+  border-radius:999px;
+  font-weight:600;
+  margin-right:.4rem;
+}
+
+.floating-call{
+  position:fixed;
+  right:18px;
+  bottom:82px;
+  width:52px;
+  height:52px;
+  background:#22c55e;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:22px;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
