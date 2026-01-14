@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Naveen Tours & Travels</title>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Auto redirect after 3 seconds -->
+  <meta http-equiv="refresh" content="3;url=index.html" />
+
+  <style>
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#ffffff;
+      font-family: 'Poppins', system-ui, sans-serif;
+    }
+
+    .splash{
+      text-align:center;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .splash img{
+      width:260px;
+      max-width:80%;
+      animation: zoom 2s ease-in-out;
+    }
+
+    .loading{
+      margin-top:1rem;
+      font-weight:600;
+      color:#0ea5a3;
+      letter-spacing:.5px;
+    }
+
+    @keyframes fadeIn{
+      from{ opacity:0 }
+      to{ opacity:1 }
+    }
+
+    @keyframes zoom{
+      from{ transform:scale(.85) }
+      to{ transform:scale(1) }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="splash">
+    <img src="assets/img/logo.png" alt="Naveen Tours & Travels Logo">
+    <div class="loading">Loading…</div>
+  </div>
+
+</body>
+</html>
