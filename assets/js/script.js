@@ -1,9 +1,10 @@
-/* Naveen Tours & Travels - script.js (FINAL COMPLETE) */
+/* Naveen Tours & Travels - script.js (FINAL COMPLETE + Maps Fix) */
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
   whatsappNumber: '919492842937',
-  email: 'info.naveentoursandtravels@gmail.com'
+  email: 'info.naveentoursandtravels@gmail.com',
+  avgSpeedKmph: 45,
 };
 
 /* ================= THEME ================= */
@@ -83,7 +84,6 @@ function attachAutocomplete(inputId, boxId) {
       item.className = 'item';
       item.textContent = place;
 
-      // works on mobile + desktop
       item.addEventListener('pointerdown', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -118,15 +118,11 @@ function handleSearchSubmit(e) {
     return;
   }
 
-  localStorage.setItem(
-    'booking',
-    JSON.stringify({ src, dst, date, vehicle })
-  );
-
+  localStorage.setItem('booking', JSON.stringify({ src, dst, date, vehicle }));
   window.location.href = 'results.html';
 }
 
-/* ================= RESULTS PAGE ================= */
+/* ================= RESULTS PAGE (WhatsApp + Google Maps FIX) ================= */
 function renderSummary() {
   const box = document.getElementById('summary');
   if (!box) return;
@@ -145,21 +141,29 @@ function renderSummary() {
     <p class="muted">For price, contact us on WhatsApp.</p>
   `;
 
+  // WhatsApp Quote
   const waBtn = document.getElementById('waQuote');
   if (waBtn) {
     const msg = encodeURIComponent(
       `Hi ${CONFIG.owner},
 Trip enquiry:
-From: ${data.src}
-To: ${data.dst}
-Date: ${data.date}
+From: ${data.src || '—'}
+To: ${data.dst || '—'}
+Date: ${data.date || '—'}
 Vehicle: ${data.vehicle || 'Any'}`
     );
     waBtn.onclick = () =>
-      window.open(
-        `https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`,
-        '_blank'
-      );
+      window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`, '_blank');
+  }
+
+  // ✅ Google Maps Directions (FIX)
+  const gmaps = document.getElementById('gmapsDir');
+  if (gmaps) {
+    const origin = encodeURIComponent(data.src || '');
+    const destination = encodeURIComponent(data.dst || '');
+    gmaps.href = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
+    gmaps.target = "_blank";
+    gmaps.rel = "noopener";
   }
 }
 
@@ -232,7 +236,7 @@ window.addEventListener('DOMContentLoaded', () => {
   attachAutocomplete('src', 'srcSuggestions');
   attachAutocomplete('dst', 'dstSuggestions');
 
-  // TODAY / TOMORROW BUTTONS (FIXED)
+  // Today / Tomorrow buttons (if present)
   const dateInput = document.getElementById('date');
   const btnToday = document.getElementById('btnToday');
   const btnTomorrow = document.getElementById('btnTomorrow');
@@ -242,7 +246,6 @@ window.addEventListener('DOMContentLoaded', () => {
       dateInput.value = new Date().toISOString().slice(0, 10);
     });
   }
-
   if (btnTomorrow && dateInput) {
     btnTomorrow.addEventListener('click', () => {
       const d = new Date(Date.now() + 86400000);
