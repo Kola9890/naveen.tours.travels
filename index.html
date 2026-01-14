@@ -6,9 +6,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Redirect after 3 seconds -->
-  <meta http-equiv="refresh" content="3;url=home.html">
-
   <style>
     body{
       margin:0;
@@ -17,16 +14,16 @@
       align-items:center;
       justify-content:center;
       background:#ffffff;
-      font-family: Poppins, system-ui, sans-serif;
+      font-family:Poppins, system-ui, sans-serif;
     }
     .splash{
       text-align:center;
-      animation: fadeIn 1.2s ease-in-out;
+      animation:fadeIn 1.2s ease-in-out;
     }
     .splash img{
       width:260px;
       max-width:80%;
-      animation: zoom 2s ease-in-out;
+      animation:zoom 2s ease-in-out;
     }
     .loading{
       margin-top:12px;
@@ -43,6 +40,29 @@
       to{transform:scale(1)}
     }
   </style>
+
+  <script>
+    (function(){
+      const KEY = 'ntt_splash_seen';
+      const DAY = 24 * 60 * 60 * 1000;
+
+      const lastSeen = localStorage.getItem(KEY);
+      const now = Date.now();
+
+      // If splash already seen within 24 hours → go directly to home
+      if (lastSeen && now - Number(lastSeen) < DAY) {
+        window.location.replace('home.html');
+      } else {
+        // Mark splash as seen
+        localStorage.setItem(KEY, now.toString());
+
+        // Redirect after 3 seconds
+        setTimeout(() => {
+          window.location.replace('home.html');
+        }, 3000);
+      }
+    })();
+  </script>
 </head>
 
 <body>
