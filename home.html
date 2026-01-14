@@ -15,11 +15,9 @@
 
 <body>
 
-<!-- HEADER -->
 <header class="site-header">
   <div class="container header-inner">
 
-    <!-- LOGO -->
     <a class="logo logo-wrap" href="home.html" aria-label="Naveen Tours & Travels">
       <img src="assets/img/logo.png" alt="Naveen Tours & Travels Logo" class="site-logo">
       <span class="brand-text">
@@ -27,7 +25,6 @@
       </span>
     </a>
 
-    <!-- NAV -->
     <nav class="nav" aria-label="Primary">
       <a href="home.html" aria-current="page">Home</a>
       <a href="results.html">Results</a>
@@ -35,16 +32,13 @@
       <a href="about.html">About</a>
     </nav>
 
-    <!-- ACTION BUTTONS -->
     <div class="header-actions">
       <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
 
-      <!-- CALL BUTTON -->
       <a class="cta call" href="tel:+919492842937" aria-label="Call Naveen Tours">
         📞 Call
       </a>
 
-      <!-- WHATSAPP -->
       <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">
         WhatsApp
       </a>
@@ -53,31 +47,45 @@
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div class="container">
 
     <div class="hero-top">
       <h1>Book Comfortable City & Outstation Cabs</h1>
-      <p class="muted">
-        Pan-India service • Reliable drivers • Instant WhatsApp quotes
-      </p>
+      <p class="muted">Pan-India service • Reliable drivers • Instant WhatsApp quotes</p>
     </div>
 
-    <!-- SEARCH CARD -->
     <div class="pill-card card">
       <form id="searchForm" class="pill-grid">
 
-        <label class="pill-item with-icon">
+        <!-- Leaving From -->
+        <label class="pill-item with-icon suggest-wrap">
           <span class="label">Leaving From</span>
           <span class="icon"><img src="assets/img/pin.svg" alt=""></span>
-          <input list="cityList" type="text" id="src" placeholder="e.g., Dachepalli" required>
+
+          <input
+            type="text"
+            id="src"
+            placeholder="Start typing city or village (min 2 letters)"
+            autocomplete="off"
+            required
+          >
+          <div class="suggestions" id="srcSuggestions"></div>
         </label>
 
-        <label class="pill-item with-icon">
+        <!-- Going To -->
+        <label class="pill-item with-icon suggest-wrap">
           <span class="label">Going To</span>
           <span class="icon"><img src="assets/img/pin.svg" alt=""></span>
-          <input list="cityList" type="text" id="dst" placeholder="e.g., Guntur" required>
+
+          <input
+            type="text"
+            id="dst"
+            placeholder="Start typing city or village (min 2 letters)"
+            autocomplete="off"
+            required
+          >
+          <div class="suggestions" id="dstSuggestions"></div>
         </label>
 
         <label class="pill-item with-icon">
@@ -110,34 +118,18 @@
         </div>
 
       </form>
-
-      <datalist id="cityList">
-        <option>Dachepalli</option>
-        <option>Guntur</option>
-        <option>Hyderabad</option>
-        <option>Vijayawada</option>
-        <option>Visakhapatnam</option>
-        <option>Bengaluru</option>
-        <option>Chennai</option>
-        <option>Mumbai</option>
-        <option>Pune</option>
-        <option>Delhi</option>
-      </datalist>
     </div>
 
-    <!-- FEATURES -->
     <div class="hero-art space">
       <div class="grid hero-feature">
         <div class="card accent1">
           <h3>Outstation Trips</h3>
           <p class="muted">Weekend trips, airport rides, long-distance travel.</p>
         </div>
-
         <div class="card accent2">
           <h3>Transparent Pricing</h3>
           <p class="muted">No hidden charges. Final quote on WhatsApp.</p>
         </div>
-
         <div class="card accent3">
           <h3>Reliable Drivers</h3>
           <p class="muted">Experienced, polite, and on-time drivers.</p>
@@ -148,7 +140,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="site-footer">
   <div class="container footer-inner">
     <p>© <span id="year"></span> Naveen Tours & Travels • All rights reserved.</p>
@@ -159,15 +150,8 @@
   </div>
 </footer>
 
-<!-- FLOATING CALL -->
-<a class="floating-call" href="tel:+919492842937" aria-label="Call Naveen Tours">
-  📞
-</a>
-
-<!-- FLOATING WHATSAPP -->
-<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">
-  💬
-</a>
+<a class="floating-call" href="tel:+919492842937" aria-label="Call Naveen Tours">📞</a>
+<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">💬</a>
 
 </body>
 </html>
