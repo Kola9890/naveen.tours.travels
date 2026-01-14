@@ -2,7 +2,7 @@
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
-  whatsappNumber: '919492842937',
+  whatsappNumber: '919492842937', // 91 + 9492842937
   email: 'info.naveentoursandtravels@gmail.com',
   avgSpeedKmph: 45,
 };
@@ -23,22 +23,23 @@ function initTheme() {
   };
 }
 
-/* ================= DATE SHORTCUTS ================= */
+/* ================= DATE SHORTCUTS (optional) ================= */
 function setToday() {
   const d = document.getElementById('date');
   if (!d) return;
   d.value = new Date().toISOString().slice(0, 10);
 }
-
 function setTomorrow() {
   const d = document.getElementById('date');
   if (!d) return;
   d.value = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
 }
 
-/* ================= WHATSAPP ================= */
+/* ================= WHATSAPP LINKS ================= */
 function initWhatsApp() {
-  const msg = encodeURIComponent(`Hi ${CONFIG.owner}, I would like to enquire about cabs.`);
+  const msg = encodeURIComponent(
+    `Hi ${CONFIG.owner}, I would like to enquire about cabs.`
+  );
   const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`;
 
   const waHeader = document.getElementById('waHeader');
@@ -52,78 +53,79 @@ function initWhatsApp() {
 }
 
 /* ================= AUTOCOMPLETE DATA ================= */
-/* You can keep expanding this list */
+/* Add more cities/villages here anytime */
 const INDIA_PLACES = [
-  "Dachepalli","Guntur","Hyderabad","Vijayawada","Visakhapatnam",
-  "Bengaluru","Chennai","Mumbai","Pune","Delhi","Kolkata","Jaipur",
-  "Dadar","Darjeeling","Davanagere","Davuluru","Dindigul","Dausa",
-  "Anantapur","Kurnool","Nellore","Tirupati","Rajahmundry","Ongole",
-  "Kadapa","Warangal","Nizamabad","Vikarabad","Medak","Karimnagar",
-  "Coimbatore","Madurai","Trichy","Salem","Erode","Mysuru",
-  "Patna","Ranchi","Lucknow","Kanpur","Noida","Gurugram"
+  "Dachepalli","Dadar","Darjeeling","Davanagere","Davuluru",
+  "Delhi","Guntur","Hyderabad","Vijayawada","Visakhapatnam",
+  "Bengaluru","Chennai","Mumbai","Pune","Kolkata","Jaipur",
+  "Kadapa","Kurnool","Nellore","Ongole","Tirupati","Rajahmundry",
+  "Warangal","Nizamabad","Karimnagar","Coimbatore","Madurai","Mysuru"
 ];
 
-/* ================= AUTOCOMPLETE (FIXED CLICK ISSUE) ================= */
+/* ================= AUTOCOMPLETE (CLICK FIXED) ================= */
 function attachAutocomplete(inputId, boxId) {
   const input = document.getElementById(inputId);
   const box = document.getElementById(boxId);
   if (!input || !box) return;
 
+  let open = false;
+
   function hide() {
     box.style.display = 'none';
     box.innerHTML = '';
+    open = false;
+  }
+
+  function show() {
+    box.style.display = 'block';
+    open = true;
   }
 
   input.addEventListener('input', () => {
     const q = input.value.trim().toLowerCase();
     box.innerHTML = '';
 
-    if (q.length < 2) {
-      hide();
-      return;
-    }
+    if (q.length < 2) return hide();
 
     const matches = INDIA_PLACES
       .filter(p => p.toLowerCase().startsWith(q))
       .slice(0, 20);
 
-    if (!matches.length) {
-      hide();
-      return;
-    }
+    if (!matches.length) return hide();
 
     matches.forEach(place => {
-      const div = document.createElement('div');
-      div.className = 'item';
-      div.textContent = place;
+      const item = document.createElement('div');
+      item.className = 'item';
+      item.textContent = place;
 
-      // ✅ mousedown works before blur (FIX)
-      div.addEventListener('mousedown', (e) => {
+      // ✅ pointerdown works on mobile + desktop
+      item.addEventListener('pointerdown', (e) => {
         e.preventDefault();
+        e.stopPropagation();
         input.value = place;
         hide();
       });
 
-      box.appendChild(div);
+      box.appendChild(item);
     });
 
-    box.style.display = 'block';
+    show();
   });
 
-  // close only when clicking outside
-  document.addEventListener('mousedown', (e) => {
-    if (!box.contains(e.target) && e.target !== input) {
+  // Close only when clicking outside
+  document.addEventListener('pointerdown', (e) => {
+    if (open && !box.contains(e.target) && e.target !== input) {
       hide();
     }
   });
 
-  // ESC closes list
+  // ESC closes
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') hide();
   });
 }
 
-/* ================= SEARCH → RESULTS ================= */
+/* ================= SEARCH -> RESULTS ================= */
 function handleSearchSubmit(e) {
   e.preventDefault();
 
@@ -138,43 +140,10 @@ function handleSearchSubmit(e) {
   }
 
   localStorage.setItem('booking', JSON.stringify({ src, dst, date, vehicle }));
-  window.location.assign('results.html');
+  window.location.href = 'results.html';
 }
 
 /* ================= RESULTS SUMMARY ================= */
-const CITY_COORDS = {
-  Dachepalli: [16.6, 79.7333],
-  Guntur: [16.3067, 80.4365],
-  Hyderabad: [17.385, 78.4867],
-  Vijayawada: [16.5062, 80.648],
-  Visakhapatnam: [17.6868, 83.2185],
-  Bengaluru: [12.9716, 77.5946],
-  Chennai: [13.0827, 80.2707],
-  Mumbai: [19.076, 72.8777],
-  Pune: [18.5204, 73.8567],
-  Delhi: [28.6139, 77.209],
-};
-
-function normalizeCity(s) {
-  return (s || '').split(',')[0].trim();
-}
-
-function haversine(a, b) {
-  const R = 6371;
-  const toRad = d => (d * Math.PI) / 180;
-  const dLat = toRad(b[0] - a[0]);
-  const dLon = toRad(b[1] - a[1]);
-
-  const A =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos(toRad(a[0])) *
-      Math.cos(toRad(b[0])) *
-      Math.sin(dLon / 2) ** 2;
-
-  const C = 2 * Math.atan2(Math.sqrt(A), Math.sqrt(1 - A));
-  return R * C;
-}
-
 function escapeHTML(str) {
   return String(str ?? '')
     .replaceAll('&', '&amp;')
@@ -191,12 +160,7 @@ function renderSummary() {
   let data = {};
   try { data = JSON.parse(localStorage.getItem('booking') || '{}'); } catch {}
 
-  const a = CITY_COORDS[normalizeCity(data.src)];
-  const b = CITY_COORDS[normalizeCity(data.dst)];
-
-  const dist = a && b ? Math.round(haversine(a, b)) : null;
-  const eta = dist ? (dist / CONFIG.avgSpeedKmph) : null;
-  const vehicleText = data.vehicle || 'Not specified';
+  const vehicleText = data.vehicle ? data.vehicle : 'Not specified';
 
   box.innerHTML = `
     <h3>Trip Summary</h3>
@@ -204,12 +168,25 @@ function renderSummary() {
     <p><strong>Going To:</strong> ${escapeHTML(data.dst || '—')}</p>
     <p><strong>Departure:</strong> ${escapeHTML(data.date || '—')}</p>
     <p><strong>Vehicle:</strong> ${escapeHTML(vehicleText)}</p>
-    <p><strong>Distance:</strong> ${dist ? dist + ' km' : '—'}</p>
-    <p><strong>ETA:</strong> ${eta ? eta.toFixed(1) + ' hrs' : '—'}</p>
+    <p class="muted small">For fares, tap WhatsApp and we’ll share a clear quote.</p>
   `;
+
+  // WhatsApp quote button (results page)
+  const msg = encodeURIComponent(
+    `Hi ${CONFIG.owner},
+Ride Enquiry
+From: ${data.src || '—'}
+To: ${data.dst || '—'}
+Date: ${data.date || '—'}
+Vehicle: ${vehicleText}`
+  );
+  const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`;
+
+  const waBtn = document.getElementById('waQuote');
+  if (waBtn) waBtn.onclick = () => window.open(waUrl, '_blank', 'noopener,noreferrer');
 }
 
-/* ================= CONTACT FORM ================= */
+/* ================= CONTACT FORM (optional) ================= */
 function initContactForm() {
   const form = document.getElementById('contactForm');
   if (!form) return;
@@ -217,8 +194,8 @@ function initContactForm() {
   const emailBtn = document.getElementById('emailFallback');
   const status = document.getElementById('formStatus');
 
-  const get = id => (document.getElementById(id)?.value || '').trim();
-  const digitsOnly = s => (s || '').replace(/\D/g, '');
+  const get = (id) => (document.getElementById(id)?.value || '').trim();
+  const digitsOnly = (s) => (s || '').replace(/\D/g, '');
 
   function showStatus(text, type) {
     if (!status) return;
@@ -229,39 +206,37 @@ function initContactForm() {
 
   function buildText() {
     return `Hi ${CONFIG.owner},
+New Booking Request
 Name: ${get('cfName')}
 Phone: ${get('cfPhone')}
 From: ${get('cfFrom')}
 To: ${get('cfTo')}
 Date: ${get('cfDate')}
-Vehicle: ${get('cfVehicle') || '—'}
+Vehicle: ${get('cfVehicle') || 'Not specified'}
 Message: ${get('cfMsg') || '—'}`;
   }
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const phone = digitsOnly(get('cfPhone'));
 
+    const phone = digitsOnly(get('cfPhone'));
     if (phone.length !== 10) {
       showStatus('Enter valid 10-digit phone number', 'error');
       return;
     }
 
     showStatus('Opening WhatsApp…', 'ok');
-    window.open(
-      `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(buildText())}`,
-      '_blank',
-      'noopener,noreferrer'
-    );
+    const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(buildText())}`;
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
     setTimeout(() => form.reset(), 300);
   });
 
   if (emailBtn) {
-    emailBtn.onclick = e => {
+    emailBtn.addEventListener('click', (e) => {
       e.preventDefault();
       window.location.href =
-        `mailto:${CONFIG.email}?subject=Booking Request&body=${encodeURIComponent(buildText())}`;
-    };
+        `mailto:${CONFIG.email}?subject=${encodeURIComponent('Booking Request')}&body=${encodeURIComponent(buildText())}`;
+    });
   }
 }
 
@@ -279,9 +254,11 @@ window.addEventListener('DOMContentLoaded', () => {
   renderSummary();
   setYear();
 
+  // attach home search
   const form = document.getElementById('searchForm');
   if (form) form.addEventListener('submit', handleSearchSubmit);
 
+  // attach autocomplete on home page if suggestion boxes exist
   attachAutocomplete('src', 'srcSuggestions');
   attachAutocomplete('dst', 'dstSuggestions');
 });
