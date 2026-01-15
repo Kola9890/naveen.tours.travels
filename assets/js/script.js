@@ -1,4 +1,4 @@
-/* Naveen Tours & Travels - script.js (FINAL COMPLETE + Maps Fix) */
+/* Naveen Tours & Travels - script.js (FINAL COMPLETE + Maps Button Fix) */
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
@@ -156,14 +156,28 @@ Vehicle: ${data.vehicle || 'Any'}`
       window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`, '_blank');
   }
 
-  // ✅ Google Maps Directions (FIX)
+  // ✅ Google Maps Directions (FORCE OPEN + FALLBACK)
   const gmaps = document.getElementById('gmapsDir');
   if (gmaps) {
     const origin = encodeURIComponent(data.src || '');
     const destination = encodeURIComponent(data.dst || '');
-    gmaps.href = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
+    const mapsUrl =
+      `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
+
+    // normal browser link
+    gmaps.href = mapsUrl;
     gmaps.target = "_blank";
     gmaps.rel = "noopener";
+
+    // force open for mobile / in-app browsers
+    gmaps.onclick = (e) => {
+      e.preventDefault();
+      const win = window.open(mapsUrl, "_blank", "noopener,noreferrer");
+      if (!win) {
+        // popup blocked -> open in same tab
+        window.location.href = mapsUrl;
+      }
+    };
   }
 }
 
