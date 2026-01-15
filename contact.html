@@ -19,7 +19,7 @@
   <div class="container header-inner">
 
     <a class="logo logo-wrap" href="home.html">
-      <img src="assets/img/logo.png" class="site-logo" alt="Naveen Tours & Travels Logo">
+      <img src="assets/img/logo.png" class="site-logo" alt="Logo">
       <span class="brand-text">Naveen <span class="brand-sub">Tours & Travels</span></span>
     </a>
 
@@ -31,9 +31,10 @@
     </nav>
 
     <div class="header-actions">
+      <button class="menu-btn" id="menuBtn">☰</button>
       <button id="themeToggle" class="toggle">🌙</button>
       <a class="cta call" href="tel:+919492842937">📞 Call</a>
-      <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="cta whatsapp" id="waHeader" href="#">WhatsApp</a>
     </div>
 
   </div>
@@ -42,7 +43,7 @@
 <section class="page-header">
   <div class="container">
     <h1>Contact & Booking</h1>
-    <p class="muted">Call, WhatsApp, or send a booking request.</p>
+    <p class="muted">We are happy to help you anytime.</p>
   </div>
 </section>
 
@@ -62,31 +63,45 @@
       </ul>
 
       <div class="cta-row">
-        <a class="btn primary" id="waContact" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        <a class="btn primary" id="waContact" href="#">Chat on WhatsApp</a>
       </div>
     </div>
 
     <div class="card">
       <h3>Quick Booking Form</h3>
-      <p class="muted">We’ll reply quickly on WhatsApp.</p>
 
       <form id="contactForm" class="contact-form">
+
         <div class="form-row">
-          <label>Name <input type="text" id="cfName" required></label>
-          <label>Phone <input type="tel" id="cfPhone" required></label>
+          <label>Name
+            <input type="text" id="cfName" required>
+          </label>
+          <label>Phone
+            <input type="tel" id="cfPhone" required>
+          </label>
         </div>
 
         <div class="form-row">
-          <label>From <input type="text" id="cfFrom" required></label>
-          <label>To <input type="text" id="cfTo" required></label>
+          <label>From
+            <input type="text" id="cfFrom" required>
+          </label>
+          <label>To
+            <input type="text" id="cfTo" required>
+          </label>
         </div>
 
         <div class="form-row">
-          <label>Date <input type="date" id="cfDate" required></label>
-          <label>Vehicle <input type="text" id="cfVehicle"></label>
+          <label>Date
+            <input type="date" id="cfDate" required>
+          </label>
+          <label>Vehicle
+            <input type="text" id="cfVehicle">
+          </label>
         </div>
 
-        <label>Message <textarea id="cfMsg" rows="4"></textarea></label>
+        <label>Message
+          <textarea id="cfMsg" rows="4"></textarea>
+        </label>
 
         <div class="form-actions">
           <button class="btn primary" type="submit">Send on WhatsApp</button>
@@ -94,22 +109,8 @@
         </div>
 
         <div id="formStatus" class="form-status"></div>
+
       </form>
-    </div>
-
-    <!-- ✅ MAP (WORKS ON MOBILE + DESKTOP) -->
-    <div class="card">
-      <h3>Our Location</h3>
-      <p class="muted">Tap the map to open directions.</p>
-
-      <div class="map-embed">
-        <iframe
-          title="Naveen Tours & Travels Location"
-          src="https://www.google.com/maps?output=embed&q=R%26B%20Centre%2C%20Dachepalli%20522414%2C%20Andhra%20Pradesh"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
     </div>
 
   </div>
@@ -117,11 +118,21 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© <span id="year"></span> Naveen Tours & Travels • All rights reserved.</p>
+    <p>© <span id="year"></span> Naveen Tours & Travels</p>
   </div>
 </footer>
 
-<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener">💬</a>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <button class="menu-close" id="menuClose">✕</button>
+    <a href="home.html">Home</a>
+    <a href="results.html">Results</a>
+    <a href="contact.html">Contact</a>
+    <a href="about.html">About</a>
+  </div>
+</div>
+
+<a class="floating-whatsapp" id="waFloat" href="#">💬</a>
 
 </body>
 </html>
