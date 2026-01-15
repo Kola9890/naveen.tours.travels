@@ -441,6 +441,14 @@ a{ color:var(--primary); text-decoration:none }
 @media (max-width: 900px){
   .hide-mobile{ display:none !important; }
 }
+/* Hide top Call + WhatsApp on mobile (keep floating buttons) */
+@media (max-width: 900px){
+  .cta.call,
+  .cta.whatsapp{
+    display:none !important;
+  }
+}
+
 
 
 
