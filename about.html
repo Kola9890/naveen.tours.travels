@@ -18,12 +18,12 @@
 <header class="site-header">
   <div class="container header-inner">
 
-    <a class="logo logo-wrap" href="home.html" aria-label="Naveen Tours & Travels">
-      <img src="assets/img/logo.png" alt="Naveen Tours & Travels Logo" class="site-logo">
+    <a class="logo logo-wrap" href="home.html">
+      <img src="assets/img/logo.png" class="site-logo" alt="Logo">
       <span class="brand-text">Naveen <span class="brand-sub">Tours & Travels</span></span>
     </a>
 
-    <nav class="nav" aria-label="Primary">
+    <nav class="nav">
       <a href="home.html">Home</a>
       <a href="results.html">Results</a>
       <a href="contact.html">Contact</a>
@@ -31,8 +31,10 @@
     </nav>
 
     <div class="header-actions">
-      <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
-      <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <button id="themeToggle" class="toggle">🌙</button>
+      <a class="cta call" href="tel:+919492842937">📞 Call</a>
+      <a class="cta whatsapp" id="waHeader" href="#">WhatsApp</a>
     </div>
 
   </div>
@@ -40,39 +42,41 @@
 
 <section class="page-header">
   <div class="container">
-    <h1>About the Company</h1>
-    <p class="muted">Comfortable city & outstation cabs with a friendly booking experience.</p>
+    <h1>About Us</h1>
+    <p class="muted">Trusted cab services across Andhra Pradesh & India.</p>
   </div>
 </section>
 
-<section class="about">
-  <div class="container grid">
-    <div class="card accent1">
-      <h3>Mission</h3>
-      <p>Simple booking, courteous drivers, and transparent communication.</p>
-    </div>
-    <div class="card accent2">
-      <h3>Fleet</h3>
-      <p>From sedans to premium vans — choose what fits your trip.</p>
-    </div>
-    <div class="card accent3">
-      <h3>Safety</h3>
-      <p>On-time pickups, clean cars, and safety as a priority.</p>
-    </div>
+<section class="container">
+  <div class="card">
+    <p>
+      Naveen Tours & Travels provides safe, comfortable, and affordable
+      cab services for city travel, outstation trips, and airport transfers.
+    </p>
+    <p>
+      We focus on punctuality, polite drivers, and transparent pricing.
+      Thousands of happy customers trust us for their journeys.
+    </p>
   </div>
 </section>
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© <span id="year"></span> Naveen Tours & Travels • All rights reserved.</p>
-    <div class="footer-links">
-      <a href="contact.html">Contact</a>
-      <a href="about.html">About</a>
-    </div>
+    <p>© <span id="year"></span> Naveen Tours & Travels</p>
   </div>
 </footer>
 
-<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">💬</a>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <button class="menu-close" id="menuClose">✕</button>
+    <a href="home.html">Home</a>
+    <a href="results.html">Results</a>
+    <a href="contact.html">Contact</a>
+    <a href="about.html">About</a>
+  </div>
+</div>
+
+<a class="floating-whatsapp" id="waFloat" href="#">💬</a>
 
 </body>
 </html>
