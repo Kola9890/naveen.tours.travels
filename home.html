@@ -114,18 +114,23 @@
     <!-- ================= FEATURES ================= -->
     <div class="hero-art space">
       <div class="grid hero-feature">
-        <div class="card accent1">
+
+        <!-- ✅ Clickable Outstation Trips -->
+        <div class="card accent1 clickable" id="outstationCard">
           <h3>Outstation Trips</h3>
           <p class="muted">Weekend trips, airport rides, long-distance travel.</p>
         </div>
+
         <div class="card accent2">
           <h3>Transparent Pricing</h3>
           <p class="muted">No hidden charges. Final quote on WhatsApp.</p>
         </div>
+
         <div class="card accent3">
           <h3>Reliable Drivers</h3>
           <p class="muted">Experienced, polite, and on-time drivers.</p>
         </div>
+
       </div>
     </div>
 
@@ -151,11 +156,47 @@
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <div class="mobile-menu-inner">
     <button class="menu-close" id="menuClose" aria-label="Close menu">✕</button>
-
     <a href="home.html">Home</a>
     <a href="results.html">Results</a>
     <a href="contact.html">Contact</a>
     <a href="about.html">About</a>
+  </div>
+</div>
+
+<!-- ✅ OUTSTATION PLACES POPUP (with images from online) -->
+<div class="modal" id="outstationModal" aria-hidden="true">
+  <div class="modal-box">
+    <button class="modal-close" id="outstationClose" aria-label="Close">✕</button>
+    <h3>Popular Outstation Places</h3>
+
+    <div class="places-grid">
+      <div class="place-card" data-place="Tirupati">
+        <img src="https://source.unsplash.com/400x300/?tirupati,temple" alt="Tirupati">
+        <span>Tirupati</span>
+      </div>
+
+      <div class="place-card" data-place="Hyderabad">
+        <img src="https://source.unsplash.com/400x300/?hyderabad,city" alt="Hyderabad">
+        <span>Hyderabad</span>
+      </div>
+
+      <div class="place-card" data-place="Bengaluru">
+        <img src="https://source.unsplash.com/400x300/?bangalore,city" alt="Bengaluru">
+        <span>Bengaluru</span>
+      </div>
+
+      <div class="place-card" data-place="Visakhapatnam">
+        <img src="https://source.unsplash.com/400x300/?visakhapatnam,beach" alt="Visakhapatnam">
+        <span>Visakhapatnam</span>
+      </div>
+
+      <div class="place-card" data-place="Vijayawada">
+        <img src="https://source.unsplash.com/400x300/?vijayawada,river" alt="Vijayawada">
+        <span>Vijayawada</span>
+      </div>
+    </div>
+
+    <p class="muted small">Tip: Tap any place to auto-fill “Going To”.</p>
   </div>
 </div>
 
