@@ -448,3 +448,69 @@ a{ color:var(--primary); text-decoration:none }
     display:none !important;
   }
 }
+/* ========= Outstation popup (modal) ========= */
+.clickable{ cursor:pointer; }
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  z-index:9999;
+  padding:1rem;
+}
+.modal.show{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-box{
+  width:min(720px, 95vw);
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:1rem 1.1rem;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+.modal-close{
+  float:right;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:999px;
+  width:42px;
+  height:42px;
+  cursor:pointer;
+}
+
+.places-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+  gap:.8rem;
+  margin-top:.9rem;
+}
+
+.place-card{
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  cursor:pointer;
+  background:var(--card);
+}
+
+.place-card img{
+  width:100%;
+  height:115px;
+  object-fit:cover;
+  display:block;
+}
+
+.place-card span{
+  display:block;
+  padding:.5rem .6rem;
+  font-weight:700;
+  text-align:center;
+}
+
