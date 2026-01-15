@@ -451,6 +451,7 @@ a{ color:var(--primary); text-decoration:none }
 /* ========= Outstation popup (modal) ========= */
 .clickable{ cursor:pointer; }
 
+/* Modal overlay */
 .modal{
   position:fixed;
   inset:0;
@@ -465,8 +466,11 @@ a{ color:var(--primary); text-decoration:none }
   justify-content:center;
 }
 
+/* Modal box responsive */
 .modal-box{
-  width:min(720px, 95vw);
+  width:min(920px, 96vw);
+  max-height:85vh;
+  overflow:auto;
   background:var(--card);
   border:1px solid var(--border);
   border-radius:16px;
@@ -474,6 +478,7 @@ a{ color:var(--primary); text-decoration:none }
   box-shadow:0 20px 40px rgba(0,0,0,.25);
 }
 
+/* Close button */
 .modal-close{
   float:right;
   border:1px solid var(--border);
@@ -485,9 +490,10 @@ a{ color:var(--primary); text-decoration:none }
   cursor:pointer;
 }
 
+/* Grid responsive */
 .places-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns:repeat(5, 1fr);
   gap:.8rem;
   margin-top:.9rem;
 }
@@ -502,15 +508,25 @@ a{ color:var(--primary); text-decoration:none }
 
 .place-card img{
   width:100%;
-  height:115px;
+  height:120px;
   object-fit:cover;
   display:block;
 }
 
 .place-card span{
   display:block;
-  padding:.5rem .6rem;
+  padding:.55rem .6rem;
   font-weight:700;
   text-align:center;
+}
+
+/* Mobile layout */
+@media (max-width: 900px){
+  .places-grid{ grid-template-columns:repeat(2, 1fr); }
+  .place-card img{ height:110px; }
+}
+@media (max-width: 420px){
+  .places-grid{ grid-template-columns:1fr; }
+  .place-card img{ height:160px; }
 }
 
