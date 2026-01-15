@@ -5,7 +5,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Contact and booking — Naveen Tours & Travels" />
+  <meta name="description" content="Contact Naveen Tours & Travels for cab bookings" />
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,18 +15,15 @@
 
 <body>
 
-<!-- HEADER (WITH LOGO IMAGE) -->
 <header class="site-header">
   <div class="container header-inner">
 
-    <a class="logo logo-wrap" href="home.html" aria-label="Naveen Tours & Travels">
-      <img src="assets/img/logo.png" alt="Naveen Tours & Travels Logo" class="site-logo">
-      <span class="brand-text">
-        Naveen <span class="brand-sub">Tours & Travels</span>
-      </span>
+    <a class="logo logo-wrap" href="home.html">
+      <img src="assets/img/logo.png" class="site-logo" alt="Logo">
+      <span class="brand-text">Naveen <span class="brand-sub">Tours & Travels</span></span>
     </a>
 
-    <nav class="nav" aria-label="Primary">
+    <nav class="nav">
       <a href="home.html">Home</a>
       <a href="results.html">Results</a>
       <a href="contact.html" aria-current="page">Contact</a>
@@ -34,146 +31,108 @@
     </nav>
 
     <div class="header-actions">
-      <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
-      <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <button id="themeToggle" class="toggle">🌙</button>
+      <a class="cta call" href="tel:+919492842937">📞 Call</a>
+      <a class="cta whatsapp" id="waHeader" href="#">WhatsApp</a>
     </div>
 
   </div>
 </header>
 
-<!-- PAGE HEADER -->
 <section class="page-header">
   <div class="container">
     <h1>Contact & Booking</h1>
-    <p class="muted">Call, WhatsApp, or send a booking request.</p>
+    <p class="muted">We are happy to help you anytime.</p>
   </div>
 </section>
 
-<!-- CONTACT CONTENT -->
 <section class="contact">
   <div class="container contact-grid">
 
-    <!-- REACH US -->
     <div class="card">
       <h3>Reach Us</h3>
-
       <ul class="contact-list">
         <li><strong>Business:</strong> Naveen Tours & Travels</li>
-
-        <li>
-          <strong>Phone / WhatsApp:</strong>
-          <a href="tel:+919492842937">+91 9492842937</a>
-        </li>
-
-        <li>
-          <strong>Email:</strong>
-          <a href="mailto:info.naveentoursandtravels@gmail.com">
-            info.naveentoursandtravels@gmail.com
-          </a>
-        </li>
-
-        <li>
-          <strong>Address:</strong><br>
+        <li><strong>Phone:</strong> <a href="tel:+919492842937">+91 9492842937</a></li>
+        <li><strong>Email:</strong> info.naveentoursandtravels@gmail.com</li>
+        <li><strong>Address:</strong><br>
           R&amp;B Centre, Dachepalli – 522414<br>
           Palnadu District, Andhra Pradesh
         </li>
       </ul>
 
       <div class="cta-row">
-        <a class="btn primary" id="waContact" href="#" target="_blank" rel="noopener">
-          Chat on WhatsApp
-        </a>
+        <a class="btn primary" id="waContact" href="#">Chat on WhatsApp</a>
       </div>
     </div>
 
-    <!-- BOOKING FORM -->
     <div class="card">
       <h3>Quick Booking Form</h3>
-      <p class="muted">We’ll reply quickly on WhatsApp.</p>
 
-      <form id="contactForm" class="contact-form" autocomplete="on">
+      <form id="contactForm" class="contact-form">
 
         <div class="form-row">
-          <label>
-            Full Name
-            <input type="text" id="cfName" placeholder="Your name" required>
+          <label>Name
+            <input type="text" id="cfName" required>
           </label>
-
-          <label>
-            Phone Number
-            <input type="tel" id="cfPhone" placeholder="9492842937"
-              inputmode="numeric" maxlength="10" pattern="[0-9]{10}" required>
+          <label>Phone
+            <input type="tel" id="cfPhone" required>
           </label>
         </div>
 
         <div class="form-row">
-          <label>
-            From
-            <input type="text" id="cfFrom" placeholder="e.g., Dachepalli" required>
+          <label>From
+            <input type="text" id="cfFrom" required>
           </label>
-
-          <label>
-            To
-            <input type="text" id="cfTo" placeholder="e.g., Guntur" required>
+          <label>To
+            <input type="text" id="cfTo" required>
           </label>
         </div>
 
         <div class="form-row">
-          <label>
-            Travel Date
+          <label>Date
             <input type="date" id="cfDate" required>
           </label>
-
-          <label>
-            Vehicle (optional)
-            <input type="text" id="cfVehicle" placeholder="Swift Dzire / Ertiga">
+          <label>Vehicle
+            <input type="text" id="cfVehicle">
           </label>
         </div>
 
-        <label>
-          Message (optional)
-          <textarea id="cfMsg" rows="4" placeholder="Any special request…"></textarea>
+        <label>Message
+          <textarea id="cfMsg" rows="4"></textarea>
         </label>
 
         <div class="form-actions">
-          <button type="submit" class="btn primary">Send on WhatsApp</button>
-          <a id="emailFallback" class="btn secondary" href="#">Send via Email</a>
+          <button class="btn primary" type="submit">Send on WhatsApp</button>
+          <a class="btn secondary" id="emailFallback" href="#">Send via Email</a>
         </div>
 
-        <div id="formStatus" class="form-status" style="display:none;"></div>
+        <div id="formStatus" class="form-status"></div>
 
       </form>
-    </div>
-
-    <!-- MAP -->
-    <div class="card">
-      <h3>Our Location</h3>
-      <p class="muted">Tap the map to open directions.</p>
-
-      <div class="map-embed">
-        <iframe
-          title="Naveen Tours & Travels Location"
-          src="https://www.google.com/maps?q=R%26B%20Centre,%20Dachepalli,%20522414,%20Palnadu%20District,%20Andhra%20Pradesh&output=embed"
-          loading="lazy">
-        </iframe>
-      </div>
     </div>
 
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© <span id="year"></span> Naveen Tours & Travels • All rights reserved.</p>
-    <div class="footer-links">
-      <a href="contact.html">Contact</a>
-      <a href="about.html">About</a>
-    </div>
+    <p>© <span id="year"></span> Naveen Tours & Travels</p>
   </div>
 </footer>
 
-<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener">💬</a>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <button class="menu-close" id="menuClose">✕</button>
+    <a href="home.html">Home</a>
+    <a href="results.html">Results</a>
+    <a href="contact.html">Contact</a>
+    <a href="about.html">About</a>
+  </div>
+</div>
+
+<a class="floating-whatsapp" id="waFloat" href="#">💬</a>
 
 </body>
 </html>
