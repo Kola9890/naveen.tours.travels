@@ -1,4 +1,4 @@
-/* Naveen Tours & Travels - script.js (FINAL COMPLETE + Maps Button Fix) */
+/* Naveen Tours & Travels - script.js (FINAL COMPLETE + Maps + Mobile Menu) */
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
@@ -122,7 +122,7 @@ function handleSearchSubmit(e) {
   window.location.href = 'results.html';
 }
 
-/* ================= RESULTS PAGE (WhatsApp + Google Maps FIX) ================= */
+/* ================= RESULTS PAGE (WhatsApp + Google Maps) ================= */
 function renderSummary() {
   const box = document.getElementById('summary');
   if (!box) return;
@@ -156,7 +156,7 @@ Vehicle: ${data.vehicle || 'Any'}`
       window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`, '_blank');
   }
 
-  // ✅ Google Maps Directions (FORCE OPEN + FALLBACK)
+  // Google Maps Directions (Force open + fallback)
   const gmaps = document.getElementById('gmapsDir');
   if (gmaps) {
     const origin = encodeURIComponent(data.src || '');
@@ -164,19 +164,14 @@ Vehicle: ${data.vehicle || 'Any'}`
     const mapsUrl =
       `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
 
-    // normal browser link
     gmaps.href = mapsUrl;
     gmaps.target = "_blank";
     gmaps.rel = "noopener";
 
-    // force open for mobile / in-app browsers
     gmaps.onclick = (e) => {
       e.preventDefault();
       const win = window.open(mapsUrl, "_blank", "noopener,noreferrer");
-      if (!win) {
-        // popup blocked -> open in same tab
-        window.location.href = mapsUrl;
-      }
+      if (!win) window.location.href = mapsUrl;
     };
   }
 }
@@ -234,12 +229,39 @@ function setYear() {
   if (y) y.textContent = new Date().getFullYear();
 }
 
+/* ================= MOBILE MENU ================= */
+function initMobileMenu() {
+  const menuBtn = document.getElementById('menuBtn');
+  const menuClose = document.getElementById('menuClose');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (!menuBtn || !menuClose || !mobileMenu) return;
+
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.add('show');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+  });
+
+  menuClose.addEventListener('click', () => {
+    mobileMenu.classList.remove('show');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+  });
+
+  mobileMenu.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) {
+      mobileMenu.classList.remove('show');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    }
+  });
+}
+
 /* ================= INIT ================= */
 window.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initWhatsApp();
   renderSummary();
   initContactForm();
+  initMobileMenu();
   setYear();
 
   // Search form
