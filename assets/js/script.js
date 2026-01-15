@@ -1,4 +1,4 @@
-/* Naveen Tours & Travels - script.js (FINAL COMPLETE + Maps + Mobile Menu) */
+/* Naveen Tours & Travels - script.js (FINAL COMPLETE + Maps + Mobile Menu + Outstation Popup) */
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
@@ -255,6 +255,42 @@ function initMobileMenu() {
   });
 }
 
+/* ================= OUTSTATION POPUP ================= */
+function initOutstationPopup() {
+  const outstationCard = document.getElementById('outstationCard');
+  const outstationModal = document.getElementById('outstationModal');
+  const outstationClose = document.getElementById('outstationClose');
+
+  if (!outstationCard || !outstationModal || !outstationClose) return;
+
+  const openModal = () => {
+    outstationModal.classList.add('show');
+    outstationModal.setAttribute('aria-hidden', 'false');
+  };
+
+  const closeModal = () => {
+    outstationModal.classList.remove('show');
+    outstationModal.setAttribute('aria-hidden', 'true');
+  };
+
+  outstationCard.addEventListener('click', openModal);
+  outstationClose.addEventListener('click', closeModal);
+
+  outstationModal.addEventListener('click', (e) => {
+    if (e.target === outstationModal) closeModal();
+  });
+
+  // Click place -> fill destination + close
+  document.querySelectorAll('.place-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const place = card.getAttribute('data-place') || card.innerText.trim();
+      const dst = document.getElementById('dst');
+      if (dst) dst.value = place;
+      closeModal();
+    });
+  });
+}
+
 /* ================= INIT ================= */
 window.addEventListener('DOMContentLoaded', () => {
   initTheme();
@@ -262,6 +298,7 @@ window.addEventListener('DOMContentLoaded', () => {
   renderSummary();
   initContactForm();
   initMobileMenu();
+  initOutstationPopup();
   setYear();
 
   // Search form
