@@ -27,7 +27,7 @@
       </span>
     </a>
 
-    <!-- NAV -->
+    <!-- DESKTOP NAV -->
     <nav class="nav" aria-label="Primary">
       <a href="home.html" aria-current="page">Home</a>
       <a href="results.html">Results</a>
@@ -37,6 +37,9 @@
 
     <!-- ACTIONS -->
     <div class="header-actions">
+      <!-- ✅ HAMBURGER (MOBILE ONLY via CSS) -->
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+
       <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
       <a class="cta call" href="tel:+919492842937" aria-label="Call Naveen Tours">📞 Call</a>
       <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
@@ -143,6 +146,18 @@
 <!-- ================= FLOATING BUTTONS ================= -->
 <a class="floating-call" href="tel:+919492842937" aria-label="Call Naveen Tours">📞</a>
 <a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp chat">💬</a>
+
+<!-- ✅ MOBILE MENU OVERLAY -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu-inner">
+    <button class="menu-close" id="menuClose" aria-label="Close menu">✕</button>
+
+    <a href="home.html">Home</a>
+    <a href="results.html">Results</a>
+    <a href="contact.html">Contact</a>
+    <a href="about.html">About</a>
+  </div>
+</div>
 
 </body>
 </html>
