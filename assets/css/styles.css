@@ -435,6 +435,13 @@ a{ color:var(--primary); text-decoration:none }
   .nav{ display:none; }
   .menu-btn{ display:inline-block; }
 }
+/* Hide on mobile only */
+.hide-mobile{ display:inline-flex; }
+
+@media (max-width: 900px){
+  .hide-mobile{ display:none !important; }
+}
+
 
 
 
