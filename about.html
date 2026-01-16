@@ -5,12 +5,72 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="About Naveen Tours & Travels" />
+  <meta name="description" content="About Naveen Tours & Travels — 25+ years of trusted cab services across South India." />
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css" />
   <script defer src="assets/js/script.js"></script>
+
+  <style>
+    /* About page extras (safe, scoped) */
+    .about-hero{ padding: 1.2rem 0; }
+    .about-lead{ max-width: 820px; }
+    .stats-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:.8rem; margin-top:1rem; }
+    .stat{
+      text-align:left;
+      padding:1rem;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:var(--card);
+    }
+    .stat strong{ font-size:1.15rem; display:block; margin-bottom:.25rem; }
+    .stat span{ color:var(--muted); font-weight:600; }
+
+    .two-col{ display:grid; grid-template-columns: 1.2fr .8fr; gap:1rem; margin-top:1rem; }
+    .bullets{ margin:0; padding-left:1.1rem; }
+    .bullets li{ margin:.45rem 0; color:var(--text); }
+
+    .tags{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.7rem; }
+    .tag{
+      padding:.45rem .7rem;
+      border:1px solid var(--border);
+      border-radius:999px;
+      font-weight:600;
+      color:var(--text);
+      background:var(--card);
+    }
+
+    .testimonials{ margin-top:1rem; }
+    .t-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:.8rem; }
+    .t-card{
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:var(--card);
+      padding:1rem;
+    }
+    .t-name{ font-weight:700; margin-top:.6rem; }
+    .t-meta{ color:var(--muted); font-size:.9rem; }
+
+    .cta-band{
+      margin-top:1rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      flex-wrap:wrap;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:var(--card);
+      padding:1rem;
+    }
+
+    @media(max-width: 900px){
+      .stats-grid{ grid-template-columns:repeat(2, 1fr); }
+      .two-col{ grid-template-columns:1fr; }
+      .t-grid{ grid-template-columns:1fr; }
+    }
+  </style>
 </head>
 
 <body>
@@ -18,12 +78,12 @@
 <header class="site-header">
   <div class="container header-inner">
 
-    <a class="logo logo-wrap" href="home.html">
-      <img src="assets/img/logo.png" class="site-logo" alt="Logo">
+    <a class="logo logo-wrap" href="home.html" aria-label="Naveen Tours & Travels">
+      <img src="assets/img/logo.png" class="site-logo" alt="Naveen Tours & Travels Logo">
       <span class="brand-text">Naveen <span class="brand-sub">Tours & Travels</span></span>
     </a>
 
-    <nav class="nav">
+    <nav class="nav" aria-label="Primary">
       <a href="home.html">Home</a>
       <a href="results.html">Results</a>
       <a href="contact.html">Contact</a>
@@ -31,10 +91,10 @@
     </nav>
 
     <div class="header-actions">
-      <button class="menu-btn" id="menuBtn">☰</button>
-      <button id="themeToggle" class="toggle">🌙</button>
-      <a class="cta call" href="tel:+919492842937">📞 Call</a>
-      <a class="cta whatsapp" id="waHeader" href="#">WhatsApp</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">🌙</button>
+      <a class="cta call" href="tel:+919492842937" aria-label="Call Naveen Tours" rel="noopener">📞 Call</a>
+      <a class="cta whatsapp" id="waHeader" href="#" target="_blank" rel="noopener">WhatsApp</a>
     </div>
 
   </div>
@@ -43,29 +103,151 @@
 <section class="page-header">
   <div class="container">
     <h1>About Us</h1>
-    <p class="muted">Trusted cab services across Andhra Pradesh & India.</p>
+    <p class="muted">Trusted cab services across Andhra Pradesh, Telangana & South India.</p>
   </div>
 </section>
 
-<section class="container">
-  <div class="card">
-    <p>
-      Naveen Tours & Travels provides safe, comfortable, and affordable
-      cab services for city travel, outstation trips, and airport transfers.
-    </p>
-    <p>
-      We focus on punctuality, polite drivers, and transparent pricing.
-      Thousands of happy customers trust us for their journeys.
-    </p>
+<section class="about-hero">
+  <div class="container">
+
+    <div class="card about-lead">
+      <h2 style="margin-top:0;">25+ Years of Experience</h2>
+
+      <p>
+        <strong>Naveen Tours & Travels</strong> is a trusted name in cab and travel services with
+        <strong>over 25 years of experience</strong> in serving customers across <strong>Andhra Pradesh and India</strong>.
+      </p>
+
+      <p>
+        What started as a small local travel service has grown into a reliable cab network offering
+        <strong>city travel, outstation trips, airport transfers, and long-distance journeys</strong>.
+        Over the years, we have successfully completed <strong>thousands of safe and comfortable trips</strong>
+        for families, corporate clients, pilgrims, and tourists.
+      </p>
+
+      <p>
+        Our strength lies in <strong>experienced drivers</strong>, <strong>punctual service</strong>,
+        <strong>well-maintained vehicles</strong>, and <strong>transparent pricing</strong>.
+        Every trip is planned with customer comfort and safety in mind, ensuring a smooth and stress-free travel experience.
+      </p>
+
+      <p class="muted">
+        Today, Naveen Tours & Travels continues to be the preferred choice for customers who value
+        trust, honesty, and long-term reliability.
+      </p>
+    </div>
+
+    <!-- Trust stats (realistic, not exaggerated) -->
+    <div class="stats-grid">
+      <div class="stat">
+        <strong>25+ Years</strong>
+        <span>Travel Experience</span>
+      </div>
+      <div class="stat">
+        <strong>Professional</strong>
+        <span>Drivers & Support</span>
+      </div>
+      <div class="stat">
+        <strong>Clean Vehicles</strong>
+        <span>Regular Maintenance</span>
+      </div>
+      <div class="stat">
+        <strong>Transparent</strong>
+        <span>Pricing Policy</span>
+      </div>
+    </div>
+
+    <!-- Why choose + Service areas -->
+    <div class="two-col">
+      <div class="card">
+        <h3 style="margin-top:0;">Why Choose Us</h3>
+        <ul class="bullets">
+          <li>On-time pickup and polite service</li>
+          <li>Clear WhatsApp confirmation before the trip</li>
+          <li>Local route knowledge + highway experience</li>
+          <li>Support for families, pilgrims & corporate travel</li>
+          <li>Flexible vehicle options for short and long trips</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0;">Service Areas Covered</h3>
+        <p class="muted small">We provide city and outstation cabs across:</p>
+
+        <div class="tags">
+          <span class="tag">Andhra Pradesh</span>
+          <span class="tag">Telangana</span>
+          <span class="tag">Tamil Nadu</span>
+          <span class="tag">Karnataka</span>
+          <span class="tag">Kerala</span>
+        </div>
+
+        <p class="muted small" style="margin-top:.8rem;">
+          Popular routes: Tirupati, Hyderabad, Bengaluru, Vijayawada, Visakhapatnam, Chennai and more.
+        </p>
+      </div>
+    </div>
+
+    <!-- Customer Testimonials -->
+    <div class="testimonials">
+      <h2 style="margin:1rem 0 .6rem;">Customer Experiences</h2>
+
+      <div class="t-grid">
+        <div class="t-card">
+          <p class="muted" style="margin:0;">
+            “Driver was on time and very polite. The car was clean and the trip was smooth.
+            WhatsApp confirmation helped a lot.”
+          </p>
+          <div class="t-name">— Family Trip (Tirupati)</div>
+          <div class="t-meta">Outstation cab • Safe & comfortable</div>
+        </div>
+
+        <div class="t-card">
+          <p class="muted" style="margin:0;">
+            “Transparent pricing and good communication. They shared the final quote before pickup.
+            No hidden charges.”
+          </p>
+          <div class="t-name">— Corporate Travel</div>
+          <div class="t-meta">Airport transfer • Professional service</div>
+        </div>
+
+        <div class="t-card">
+          <p class="muted" style="margin:0;">
+            “Very reliable for long distance. Great route knowledge and safe driving.
+            We will book again.”
+          </p>
+          <div class="t-name">— Outstation Journey</div>
+          <div class="t-meta">South India • Repeat customer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-band">
+      <div>
+        <h3 style="margin:0;">Need a cab today?</h3>
+        <p class="muted" style="margin:.25rem 0 0;">Message us on WhatsApp for an exact quote & quick confirmation.</p>
+      </div>
+
+      <a class="btn primary" id="waHeader" href="#" target="_blank" rel="noopener" style="white-space:nowrap;">
+        💬 WhatsApp Now
+      </a>
+    </div>
+
   </div>
 </section>
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© <span id="year"></span> Naveen Tours & Travels</p>
+    <p>© <span id="year"></span> Naveen Tours & Travels • All rights reserved.</p>
+    <div class="footer-links">
+      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a>
+    </div>
   </div>
 </footer>
 
+<!-- Mobile Menu (with Instagram follow) -->
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <div class="mobile-menu-inner" id="mobileMenuInner">
     <button class="menu-close" id="menuClose" aria-label="Close menu">✕</button>
@@ -75,7 +257,6 @@
     <a href="contact.html" class="mobile-link">Contact</a>
     <a href="about.html" class="mobile-link">About</a>
 
-    <!-- Follow Us -->
     <div class="mobile-follow">
       <p class="follow-title">Follow Us</p>
       <a class="ig-link"
@@ -89,7 +270,7 @@
   </div>
 </div>
 
-<a class="floating-whatsapp" id="waFloat" href="#">💬</a>
+<a class="floating-whatsapp" id="waFloat" href="#" target="_blank" rel="noopener">💬</a>
 
 </body>
 </html>
