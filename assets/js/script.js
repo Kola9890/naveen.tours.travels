@@ -1,4 +1,4 @@
-/* Naveen Tours & Travels - script.js (FINAL COMPLETE + Maps + Mobile Menu + Outstation Popup) */
+/* Naveen Tours & Travels - script.js (FINAL COMPLETE + Maps + Mobile Menu + Outstation Popup + Tirupati Gallery) */
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
@@ -141,7 +141,6 @@ function renderSummary() {
     <p class="muted">For price, contact us on WhatsApp.</p>
   `;
 
-  // WhatsApp Quote
   const waBtn = document.getElementById('waQuote');
   if (waBtn) {
     const msg = encodeURIComponent(
@@ -156,7 +155,6 @@ Vehicle: ${data.vehicle || 'Any'}`
       window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`, '_blank');
   }
 
-  // Google Maps Directions (Force open + fallback)
   const gmaps = document.getElementById('gmapsDir');
   if (gmaps) {
     const origin = encodeURIComponent(data.src || '');
@@ -255,6 +253,31 @@ function initMobileMenu() {
   });
 }
 
+/* ================= TIRUPATI GALLERY MODAL ================= */
+function initTirupatiGallery() {
+  const tiruModal = document.getElementById('tirupatiModal');
+  const tiruClose = document.getElementById('tirupatiClose');
+
+  if (!tiruModal || !tiruClose) return;
+
+  const open = () => {
+    tiruModal.classList.add('show');
+    tiruModal.setAttribute('aria-hidden', 'false');
+  };
+
+  const close = () => {
+    tiruModal.classList.remove('show');
+    tiruModal.setAttribute('aria-hidden', 'true');
+  };
+
+  tiruClose.addEventListener('click', close);
+  tiruModal.addEventListener('click', (e) => {
+    if (e.target === tiruModal) close();
+  });
+
+  return { open, close };
+}
+
 /* ================= OUTSTATION POPUP ================= */
 function initOutstationPopup() {
   const outstationCard = document.getElementById('outstationCard');
@@ -262,6 +285,8 @@ function initOutstationPopup() {
   const outstationClose = document.getElementById('outstationClose');
 
   if (!outstationCard || !outstationModal || !outstationClose) return;
+
+  const tiruGallery = initTirupatiGallery(); // may be null if modal not present
 
   const openModal = () => {
     outstationModal.classList.add('show');
@@ -280,10 +305,19 @@ function initOutstationPopup() {
     if (e.target === outstationModal) closeModal();
   });
 
-  // Click place -> fill destination + close
+  // Click place cards
   document.querySelectorAll('.place-card').forEach((card) => {
     card.addEventListener('click', () => {
       const place = card.getAttribute('data-place') || card.innerText.trim();
+
+      // ✅ If Tirupati, open gallery instead of autofill/close
+      if (place.toLowerCase() === 'tirupati' && tiruGallery && tiruGallery.open) {
+        closeModal();
+        tiruGallery.open();
+        return;
+      }
+
+      // Normal behavior: autofill "Going To" and close outstation modal
       const dst = document.getElementById('dst');
       if (dst) dst.value = place;
       closeModal();
@@ -301,15 +335,12 @@ window.addEventListener('DOMContentLoaded', () => {
   initOutstationPopup();
   setYear();
 
-  // Search form
   const form = document.getElementById('searchForm');
   if (form) form.addEventListener('submit', handleSearchSubmit);
 
-  // Autocomplete
   attachAutocomplete('src', 'srcSuggestions');
   attachAutocomplete('dst', 'dstSuggestions');
 
-  // Today / Tomorrow buttons (if present)
   const dateInput = document.getElementById('date');
   const btnToday = document.getElementById('btnToday');
   const btnTomorrow = document.getElementById('btnTomorrow');
