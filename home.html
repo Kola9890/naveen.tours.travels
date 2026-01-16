@@ -97,10 +97,13 @@
           <h3>Outstation Trips</h3>
           <p class="muted">Weekend trips, airport rides, long-distance travel.</p>
         </div>
-        <div class="card accent2">
+
+        <!-- ✅ FIX: Pricing card now clickable -->
+        <div class="card accent2 clickable" id="pricingCard">
           <h3>Transparent Pricing</h3>
           <p class="muted">No hidden charges. Final quote on WhatsApp.</p>
         </div>
+
         <div class="card accent3">
           <h3>Reliable Drivers</h3>
           <p class="muted">Experienced, polite, and on-time drivers.</p>
@@ -147,7 +150,6 @@
   </div>
 </div>
 
-
 <!-- Outstation modal -->
 <div class="modal" id="outstationModal" aria-hidden="true">
   <div class="modal-box">
@@ -185,7 +187,7 @@
   </div>
 </div>
 
-<!-- Galleries -->
+<!-- Galleries (unchanged) -->
 <div class="modal" id="tirupatiModal" aria-hidden="true">
   <div class="modal-box large">
     <button class="modal-close" id="tirupatiClose" aria-label="Close">✕</button>
@@ -247,6 +249,33 @@
       <figure class="gallery-item"><img src="assets/img/vijayawada2.jpg" alt=""><figcaption>Prakasam Barrage</figcaption></figure>
       <figure class="gallery-item"><img src="assets/img/vijayawada3.jpg" alt=""><figcaption>Bhavani Island</figcaption></figure>
       <figure class="gallery-item"><img src="assets/img/vijayawada4.jpg" alt=""><figcaption>Undavalli Caves</figcaption></figure>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Transparent Pricing modal (OPTION 1) -->
+<div class="modal" id="pricingModal" aria-hidden="true">
+  <div class="modal-box">
+    <button class="modal-close" id="pricingClose" aria-label="Close">✕</button>
+
+    <h3>Transparent Pricing – No Surprises</h3>
+    <p class="muted">
+      We follow honest and upfront pricing. No hidden charges. No last-minute changes.
+    </p>
+
+    <ul class="pricing-points">
+      <li>✔️ Per-kilometer pricing based on vehicle</li>
+      <li>✔️ Driver allowance included</li>
+      <li>✔️ Toll & parking as per actuals</li>
+      <li>✔️ Final price shared before trip</li>
+      <li>✔️ No price change after confirmation</li>
+    </ul>
+
+    <div class="pricing-actions">
+      <a href="#" id="pricingWhatsApp" class="btn primary" target="_blank" rel="noopener">
+        📲 Get Exact Price on WhatsApp
+      </a>
+      <button class="btn secondary" id="pricingCloseBtn">Close</button>
     </div>
   </div>
 </div>
