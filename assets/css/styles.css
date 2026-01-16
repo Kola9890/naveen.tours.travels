@@ -510,6 +510,68 @@ a{ color:var(--primary); text-decoration:none; }
   transform: translateY(-6px);
   box-shadow: 0 18px 40px rgba(0,0,0,.18);
 }
+/* ===== PREMIUM GALLERY CARDS ONLY ===== */
+.gallery-item{
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0b1220;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+/* Image smooth zoom */
+.gallery-item img{
+  transition: transform .45s ease;
+}
+
+/* Caption overlay polish */
+.gallery-item figcaption{
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.75),
+    rgba(0,0,0,.25),
+    transparent
+  );
+  transform: translateY(100%);
+  transition: transform .35s ease;
+}
+
+/* Hover effect */
+.gallery-item:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px rgba(0,0,0,.35);
+}
+
+.gallery-item:hover img{
+  transform: scale(1.08);
+}
+
+.gallery-item:hover figcaption{
+  transform: translateY(0);
+}
+
+/* Click feel */
+.gallery-item:active{
+  transform: scale(.98);
+}
+
+/* Mobile: disable heavy motion */
+@media (max-width: 600px){
+  .gallery-item:hover{
+    transform: none;
+    box-shadow: none;
+  }
+  .gallery-item figcaption{
+    transform: translateY(0);
+  }
+}
+
 
 .hero-feature .card:active{
   transform: scale(.98);
