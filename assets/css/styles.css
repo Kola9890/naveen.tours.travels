@@ -499,3 +499,19 @@ a{ color:var(--primary); text-decoration:none; }
 .grid .card{
   border-radius: 16px;
 }
+
+/* ===== PREMIUM LOOK (ONLY HOME FEATURE CARDS) ===== */
+.hero-feature .card{
+  border-radius: 16px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.hero-feature .card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.18);
+}
+
+.hero-feature .card:active{
+  transform: scale(.98);
+}
+
