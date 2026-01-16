@@ -1,4 +1,4 @@
-/* Naveen Tours & Travels - script.js (FINAL ALL FEATURES) */
+/* Naveen Tours & Travels - script.js (FINAL ALL FEATURES + Mobile Menu Links Fix) */
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
@@ -57,22 +57,28 @@ function attachAutocomplete(inputId, boxId) {
     box.innerHTML = '';
     if (q.length < 2) return hide();
 
-    INDIA_PLACES.filter(p => p.toLowerCase().startsWith(q))
+    INDIA_PLACES
+      .filter(p => p.toLowerCase().startsWith(q))
+      .slice(0, 20)
       .forEach(place => {
         const div = document.createElement('div');
         div.className = 'item';
         div.textContent = place;
-        div.onclick = () => {
+
+        // pointerdown works better on mobile
+        div.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
           input.value = place;
           hide();
-        };
+        });
+
         box.appendChild(div);
       });
 
     box.style.display = 'block';
   });
 
-  document.addEventListener('click', e => {
+  document.addEventListener('pointerdown', e => {
     if (!box.contains(e.target) && e.target !== input) hide();
   });
 }
@@ -109,10 +115,36 @@ function renderSummary() {
     <p><b>Vehicle:</b> ${data.vehicle || 'Any'}</p>
   `;
 
+  // WhatsApp quote button (results page)
+  const waBtn = document.getElementById('waQuote');
+  if (waBtn) {
+    const msg = encodeURIComponent(
+      `Hi ${CONFIG.owner},
+Trip enquiry:
+From: ${data.src || '-'}
+To: ${data.dst || '-'}
+Date: ${data.date || '-'}
+Vehicle: ${data.vehicle || 'Any'}`
+    );
+    waBtn.onclick = () =>
+      window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`, '_blank');
+  }
+
+  // Google Maps Directions (results page)
   const gmaps = document.getElementById('gmapsDir');
   if (gmaps) {
-    const url = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(data.src)}&destination=${encodeURIComponent(data.dst)}`;
-    gmaps.onclick = () => window.open(url, '_blank');
+    const url = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(data.src || '')}&destination=${encodeURIComponent(data.dst || '')}&travelmode=driving`;
+
+    gmaps.href = url;
+    gmaps.target = "_blank";
+    gmaps.rel = "noopener";
+
+    // Force open for in-app browsers
+    gmaps.onclick = (e) => {
+      e.preventDefault();
+      const win = window.open(url, "_blank", "noopener,noreferrer");
+      if (!win) window.location.href = url;
+    };
   }
 }
 
@@ -123,9 +155,28 @@ function initMobileMenu() {
   const menu = document.getElementById('mobileMenu');
   if (!btn || !close || !menu) return;
 
-  btn.onclick = () => menu.classList.add('show');
-  close.onclick = () => menu.classList.remove('show');
-  menu.onclick = e => e.target === menu && menu.classList.remove('show');
+  btn.onclick = () => {
+    menu.classList.add('show');
+    menu.setAttribute('aria-hidden', 'false');
+  };
+
+  const closeMenu = () => {
+    menu.classList.remove('show');
+    menu.setAttribute('aria-hidden', 'true');
+  };
+
+  close.onclick = closeMenu;
+  menu.onclick = e => {
+    if (e.target === menu) closeMenu();
+  };
+
+  // ✅ IMPORTANT FIX: close menu when clicking any menu link
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      closeMenu();
+      // allow navigation normally
+    });
+  });
 }
 
 /* ================= MODAL HELPERS ================= */
@@ -151,7 +202,7 @@ function attachGalleryModal(modalId, closeBtnId) {
 
   const closeGallery = () => {
     closeModal(modalId);
-    openModal('outstationModal'); // ✅ BACK TO POPULAR PLACES
+    openModal('outstationModal'); // ✅ Back to Popular Places
   };
 
   closeBtn.onclick = closeGallery;
