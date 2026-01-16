@@ -1,4 +1,4 @@
-/* Naveen Tours & Travels - script.js (FINAL ALL FEATURES + Mobile Menu Links Fix) */
+/* Naveen Tours & Travels - script.js (FINAL ALL FEATURES + FIXED TODAY/TOMORROW + CONTACT FORM) */
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
@@ -65,7 +65,6 @@ function attachAutocomplete(inputId, boxId) {
         div.className = 'item';
         div.textContent = place;
 
-        // pointerdown works better on mobile
         div.addEventListener('pointerdown', (e) => {
           e.preventDefault();
           input.value = place;
@@ -98,6 +97,27 @@ function handleSearchSubmit(e) {
 
   localStorage.setItem('booking', JSON.stringify({ src, dst, date, vehicle }));
   window.location.href = 'results.html';
+}
+
+/* ✅ TODAY / TOMORROW FIX */
+function initDateButtons() {
+  const dateInput = document.getElementById('date');
+  const btnToday = document.getElementById('btnToday');
+  const btnTomorrow = document.getElementById('btnTomorrow');
+  if (!dateInput) return;
+
+  if (btnToday) {
+    btnToday.addEventListener('click', () => {
+      dateInput.value = new Date().toISOString().slice(0, 10);
+    });
+  }
+
+  if (btnTomorrow) {
+    btnTomorrow.addEventListener('click', () => {
+      const d = new Date(Date.now() + 86400000);
+      dateInput.value = d.toISOString().slice(0, 10);
+    });
+  }
 }
 
 /* ================= RESULTS PAGE ================= */
@@ -133,18 +153,68 @@ Vehicle: ${data.vehicle || 'Any'}`
   // Google Maps Directions (results page)
   const gmaps = document.getElementById('gmapsDir');
   if (gmaps) {
-    const url = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(data.src || '')}&destination=${encodeURIComponent(data.dst || '')}&travelmode=driving`;
+    const url =
+      `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(data.src || '')}` +
+      `&destination=${encodeURIComponent(data.dst || '')}&travelmode=driving`;
 
     gmaps.href = url;
     gmaps.target = "_blank";
     gmaps.rel = "noopener";
 
-    // Force open for in-app browsers
     gmaps.onclick = (e) => {
       e.preventDefault();
       const win = window.open(url, "_blank", "noopener,noreferrer");
       if (!win) window.location.href = url;
     };
+  }
+}
+
+/* ✅ CONTACT FORM FIX (Send filled details to WhatsApp + Email) */
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  const status = document.getElementById('formStatus');
+  const emailBtn = document.getElementById('emailFallback');
+
+  const get = (id) => (document.getElementById(id)?.value || '').trim();
+
+  function showStatus(msg, type) {
+    if (!status) return;
+    status.textContent = msg;
+    status.className = `form-status ${type}`;
+    status.style.display = 'block';
+  }
+
+  function buildMsg() {
+    return `Hi ${CONFIG.owner},
+New Booking Request
+Name: ${get('cfName')}
+Phone: ${get('cfPhone')}
+From: ${get('cfFrom')}
+To: ${get('cfTo')}
+Date: ${get('cfDate')}
+Vehicle: ${get('cfVehicle') || 'Any'}
+Message: ${get('cfMsg') || '-'}`;
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(buildMsg())}`;
+    showStatus('Opening WhatsApp…', 'ok');
+    const win = window.open(waUrl, "_blank", "noopener,noreferrer");
+    if (!win) window.location.href = waUrl;
+  });
+
+  if (emailBtn) {
+    emailBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const mailto =
+        `mailto:${CONFIG.email}` +
+        `?subject=${encodeURIComponent('Booking Request - Naveen Tours & Travels')}` +
+        `&body=${encodeURIComponent(buildMsg())}`;
+      window.location.href = mailto;
+    });
   }
 }
 
@@ -166,16 +236,10 @@ function initMobileMenu() {
   };
 
   close.onclick = closeMenu;
-  menu.onclick = e => {
-    if (e.target === menu) closeMenu();
-  };
+  menu.onclick = e => { if (e.target === menu) closeMenu(); };
 
-  // ✅ IMPORTANT FIX: close menu when clicking any menu link
   document.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', () => {
-      closeMenu();
-      // allow navigation normally
-    });
+    link.addEventListener('click', closeMenu);
   });
 }
 
@@ -202,7 +266,7 @@ function attachGalleryModal(modalId, closeBtnId) {
 
   const closeGallery = () => {
     closeModal(modalId);
-    openModal('outstationModal'); // ✅ Back to Popular Places
+    openModal('outstationModal');
   };
 
   closeBtn.onclick = closeGallery;
@@ -252,6 +316,8 @@ window.addEventListener('DOMContentLoaded', () => {
   renderSummary();
   initMobileMenu();
   initOutstationPopup();
+  initContactForm();   // ✅ added
+  initDateButtons();   // ✅ added
   setYear();
 
   const form = document.getElementById('searchForm');
