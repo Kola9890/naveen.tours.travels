@@ -493,3 +493,50 @@ a{ color:var(--primary); text-decoration:none; }
 @media(max-width:600px){
   .gallery-item img{ height:160px; }
 }
+/* ================= PREMIUM LOOK (ADD-ON) ================= */
+
+/* 1) Add clear gap between Search bar and feature cards */
+.pill-card{
+  margin-bottom: 32px;
+}
+
+.hero-art{
+  margin-top: 26px;
+}
+
+/* Nice divider line between sections */
+.hero-art::before{
+  content:"";
+  display:block;
+  height:1px;
+  background:linear-gradient(to right, transparent, var(--border), transparent);
+  margin-bottom: 26px;
+}
+
+/* 2) Smooth premium hover animations */
+.card, .place-card, .gallery-item{
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.card:hover, .place-card:hover, .gallery-item:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.18);
+}
+
+/* image zoom on hover */
+.place-card img, .gallery-item img{
+  transition: transform .35s ease;
+}
+.place-card:hover img, .gallery-item:hover img{
+  transform: scale(1.06);
+}
+
+/* click press feedback */
+.card:active, .place-card:active, .gallery-item:active{
+  transform: scale(.98);
+}
+
+/* 3) Slightly nicer rounding for feature cards */
+.grid .card{
+  border-radius: 16px;
+}
