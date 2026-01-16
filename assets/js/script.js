@@ -33,6 +33,9 @@ function initWhatsApp() {
     const el = document.getElementById(id);
     if (el) el.href = url;
   });
+  const waAbout = document.getElementById('waAbout');
+  if (waAbout) waAbout.href = url;
+
 }
 
 /* ================= AUTOCOMPLETE ================= */
