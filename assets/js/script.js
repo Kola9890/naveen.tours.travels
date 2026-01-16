@@ -343,6 +343,31 @@ function setYear() {
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 }
+/* ================= RELIABLE DRIVERS POPUP ================= */
+function initDriversPopup(){
+  const card = document.getElementById('driversCard');
+  const modal = document.getElementById('driversModal');
+  const close1 = document.getElementById('driversClose');
+  const close2 = document.getElementById('driversCloseBtn');
+  const wa = document.getElementById('driversWhatsApp');
+
+  if (!card || !modal) return;
+
+  const waMsg = encodeURIComponent(
+    `Hi ${CONFIG.owner}, I want a cab with a reliable and verified driver.`
+  );
+  if (wa) {
+    wa.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${waMsg}`;
+  }
+
+  card.onclick = () => openModal('driversModal');
+  if (close1) close1.onclick = () => closeModal('driversModal');
+  if (close2) close2.onclick = () => closeModal('driversModal');
+
+  modal.onclick = e => {
+    if (e.target === modal) closeModal('driversModal');
+  };
+}
 
 /* ================= INIT ================= */
 window.addEventListener('DOMContentLoaded', () => {
@@ -353,7 +378,8 @@ window.addEventListener('DOMContentLoaded', () => {
   initOutstationPopup();
   initContactForm();
   initDateButtons();
-  initPricingPopup();       // ✅ added
+  initPricingPopup(); 
+  initDriversPopup();
   setYear();
 
   const form = document.getElementById('searchForm');
