@@ -1,4 +1,4 @@
-/* Naveen Tours & Travels - script.js (FINAL ALL FEATURES + FIXED TODAY/TOMORROW + CONTACT FORM) */
+/* Naveen Tours & Travels - script.js (FINAL ALL FEATURES + PRICING POPUP ADDED) */
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
@@ -135,7 +135,7 @@ function renderSummary() {
     <p><b>Vehicle:</b> ${data.vehicle || 'Any'}</p>
   `;
 
-  // WhatsApp quote button (results page)
+  // WhatsApp quote button
   const waBtn = document.getElementById('waQuote');
   if (waBtn) {
     const msg = encodeURIComponent(
@@ -150,7 +150,7 @@ Vehicle: ${data.vehicle || 'Any'}`
       window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`, '_blank');
   }
 
-  // Google Maps Directions (results page)
+  // Google Maps directions
   const gmaps = document.getElementById('gmapsDir');
   if (gmaps) {
     const url =
@@ -169,7 +169,7 @@ Vehicle: ${data.vehicle || 'Any'}`
   }
 }
 
-/* ✅ CONTACT FORM FIX (Send filled details to WhatsApp + Email) */
+/* ✅ CONTACT FORM FIX */
 function initContactForm() {
   const form = document.getElementById('contactForm');
   if (!form) return;
@@ -303,6 +303,41 @@ function initOutstationPopup() {
   });
 }
 
+/* ✅ Transparent Pricing Popup (Option 1) */
+function initPricingPopup() {
+  const pricingCard = document.getElementById('pricingCard');
+  const modal = document.getElementById('pricingModal');
+  const closeX = document.getElementById('pricingClose');
+  const closeBtn = document.getElementById('pricingCloseBtn');
+  const waBtn = document.getElementById('pricingWhatsApp');
+
+  if (!pricingCard || !modal) return;
+
+  const open = () => {
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+  };
+  const close = () => {
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden', 'true');
+  };
+
+  pricingCard.addEventListener('click', open);
+  closeX?.addEventListener('click', close);
+  closeBtn?.addEventListener('click', close);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) close();
+  });
+
+  if (waBtn) {
+    const msg = encodeURIComponent(
+      `Hi ${CONFIG.owner}, I want to know pricing details for my trip.`
+    );
+    waBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`;
+  }
+}
+
 /* ================= YEAR ================= */
 function setYear() {
   const y = document.getElementById('year');
@@ -316,8 +351,9 @@ window.addEventListener('DOMContentLoaded', () => {
   renderSummary();
   initMobileMenu();
   initOutstationPopup();
-  initContactForm();   // ✅ added
-  initDateButtons();   // ✅ added
+  initContactForm();
+  initDateButtons();
+  initPricingPopup();       // ✅ added
   setYear();
 
   const form = document.getElementById('searchForm');
