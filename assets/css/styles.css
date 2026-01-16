@@ -85,7 +85,7 @@ a{ color:var(--primary); text-decoration:none; }
   border-radius:18px;
   padding:1rem;
   box-shadow:0 12px 24px rgba(0,0,0,.06);
-  margin-bottom:28px;           /* ✅ spacing fix */
+  margin-bottom:32px; /* ✅ spacing */
 }
 
 .pill-grid{
@@ -147,14 +147,14 @@ a{ color:var(--primary); text-decoration:none; }
 }
 .btn.search:hover{ background:var(--brand-dark); }
 
-/* ✅ section separation */
-.hero-art{ margin-top:24px; }
+/* ✅ separation line for feature section */
+.hero-art{ margin-top:26px; }
 .hero-art::before{
   content:"";
   display:block;
   height:1px;
   background:linear-gradient(to right, transparent, var(--border), transparent);
-  margin-bottom:24px;
+  margin-bottom:26px;
 }
 
 /* ================= COMMON ================= */
@@ -168,7 +168,6 @@ a{ color:var(--primary); text-decoration:none; }
 .accent1{ background:linear-gradient(180deg,rgba(96,165,250,.20),var(--card)); }
 .accent2{ background:linear-gradient(180deg,rgba(245,158,11,.20),var(--card)); }
 .accent3{ background:linear-gradient(180deg,rgba(34,197,94,.20),var(--card)); }
-
 .clickable{ cursor:pointer; }
 
 .btn.primary{
@@ -197,36 +196,17 @@ a{ color:var(--primary); text-decoration:none; }
 .btn.primary:hover,
 .btn.secondary:hover{ filter:brightness(.98); }
 
-/* Page header */
-.page-header{
-  padding:1rem 0;
-  border-bottom:1px solid var(--border);
-}
-
-/* Results */
-.results .actions-card{
-  margin-top:1rem;
-  display:flex;
-  gap:.8rem;
-  flex-wrap:wrap;
-}
+/* Page header + results */
+.page-header{ padding:1rem 0; border-bottom:1px solid var(--border); }
+.results .actions-card{ margin-top:1rem; display:flex; gap:.8rem; flex-wrap:wrap; }
 
 /* ================= CONTACT ================= */
-.contact-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1rem;
-}
+.contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
 .contact-list{ list-style:none; padding:0; margin:0; }
 .contact-list li{ margin:0 0 8px 0; }
 .cta-row{ margin-top:16px; }
 
-.contact-form label{
-  display:flex;
-  flex-direction:column;
-  gap:.35rem;
-  font-weight:600;
-}
+.contact-form label{ display:flex; flex-direction:column; gap:.35rem; font-weight:600; }
 .contact-form input,
 .contact-form textarea{
   padding:.6rem .7rem;
@@ -235,18 +215,9 @@ a{ color:var(--primary); text-decoration:none; }
   background:var(--card);
   color:var(--text);
 }
-.form-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:.8rem;
-  margin-bottom:.8rem;
-}
-.form-actions{
-  display:flex;
-  gap:.6rem;
-  margin-top:.8rem;
-  flex-wrap:wrap;
-}
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:.8rem; margin-bottom:.8rem; }
+.form-actions{ display:flex; gap:.6rem; margin-top:.8rem; flex-wrap:wrap; }
+
 .form-status{
   margin-top:.8rem;
   padding:.7rem .9rem;
@@ -258,6 +229,7 @@ a{ color:var(--primary); text-decoration:none; }
 .form-status.ok{ background:rgba(34,197,94,.12); }
 .form-status.error{ background:rgba(239,68,68,.12); }
 
+/* Map embed */
 .map-embed{ width:100%; border-radius:12px; overflow:hidden; }
 .map-embed iframe{ width:100%; height:320px; border:0; display:block; }
 
@@ -312,8 +284,7 @@ a{ color:var(--primary); text-decoration:none; }
 .suggestions{
   position:absolute;
   top:100%;
-  left:0;
-  right:0;
+  left:0; right:0;
   background:var(--card);
   border:1px solid var(--border);
   border-radius:12px;
@@ -324,14 +295,8 @@ a{ color:var(--primary); text-decoration:none; }
   margin-top:6px;
   box-shadow:0 10px 25px rgba(0,0,0,.10);
 }
-.suggestions .item{
-  padding:.6rem .8rem;
-  cursor:pointer;
-  color:var(--text);
-}
-.suggestions .item:hover{
-  background:rgba(14,165,163,.12);
-}
+.suggestions .item{ padding:.6rem .8rem; cursor:pointer; color:var(--text); }
+.suggestions .item:hover{ background:rgba(14,165,163,.12); }
 
 /* ================= MOBILE MENU ================= */
 .menu-btn{
@@ -377,7 +342,29 @@ a{ color:var(--primary); text-decoration:none; }
 }
 .mobile-menu-inner a:hover{ color:var(--primary); }
 
-/* ================= MODALS (Outstation + Galleries) ================= */
+/* Instagram follow section in mobile menu */
+.mobile-follow{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid var(--border);
+}
+.follow-title{
+  margin:0 0 10px;
+  font-weight:700;
+  color:var(--muted);
+}
+.ig-link{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  color:var(--text);
+}
+.ig-icon{ width:22px; height:22px; }
+
+/* ================= MODALS ================= */
 .modal{
   position:fixed;
   inset:0;
@@ -386,11 +373,7 @@ a{ color:var(--primary); text-decoration:none; }
   z-index:9999;
   padding:1rem;
 }
-.modal.show{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+.modal.show{ display:flex; align-items:center; justify-content:center; }
 .modal-box{
   width:min(920px, 96vw);
   max-height:85vh;
@@ -413,6 +396,7 @@ a{ color:var(--primary); text-decoration:none; }
   cursor:pointer;
 }
 
+/* Outstation cards grid */
 .places-grid{
   display:grid;
   grid-template-columns:repeat(5, 1fr);
@@ -421,7 +405,7 @@ a{ color:var(--primary); text-decoration:none; }
 }
 .place-card{
   border:1px solid var(--border);
-  border-radius:14px;
+  border-radius:16px;
   overflow:hidden;
   cursor:pointer;
   background:var(--card);
@@ -439,7 +423,7 @@ a{ color:var(--primary); text-decoration:none; }
   text-align:center;
 }
 
-/* Gallery captions */
+/* Gallery (premium captions) */
 .gallery-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
@@ -447,24 +431,70 @@ a{ color:var(--primary); text-decoration:none; }
   margin-top:16px;
 }
 .gallery-item{
-  background:#0b1220;
-  border-radius:14px;
+  position:relative;
+  border-radius:16px;
   overflow:hidden;
-  text-align:center;
+  background:#0b1220;
+  transition: transform .35s ease, box-shadow .35s ease;
 }
 .gallery-item img{
   width:100%;
   height:180px;
   object-fit:cover;
   display:block;
+  transition: transform .45s ease;
 }
 .gallery-item figcaption{
-  padding:10px;
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding:12px;
   font-size:14px;
   font-weight:600;
-  color:#e5e7eb;
-  background:rgba(0,0,0,.45);
+  color:#fff;
+  background:linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,.25), transparent);
+  transform: translateY(100%);
+  transition: transform .35s ease;
 }
+.gallery-item:hover{
+  transform: translateY(-6px);
+  box-shadow:0 20px 45px rgba(0,0,0,.35);
+}
+.gallery-item:hover img{ transform: scale(1.08); }
+.gallery-item:hover figcaption{ transform: translateY(0); }
+.gallery-item:active{ transform: scale(.98); }
+
+/* Premium outstation cards ONLY inside outstation modal */
+#outstationModal .place-card{
+  position:relative;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+#outstationModal .place-card span{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding:12px;
+  font-size:16px;
+  font-weight:700;
+  color:#fff;
+  background:linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,.25), transparent);
+}
+#outstationModal .place-card img{ transition: transform .45s ease; }
+#outstationModal .place-card:hover{
+  transform: translateY(-6px);
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+#outstationModal .place-card:hover img{ transform: scale(1.08); }
+#outstationModal .place-card:active{ transform: scale(.98); }
+
+/* Premium hover ONLY home feature cards */
+.hero-feature .card{
+  border-radius:16px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.hero-feature .card:hover{
+  transform: translateY(-6px);
+  box-shadow:0 18px 40px rgba(0,0,0,.18);
+}
+.hero-feature .card:active{ transform: scale(.98); }
 
 /* ================= RESPONSIVE ================= */
 @media(max-width:900px){
@@ -480,6 +510,10 @@ a{ color:var(--primary); text-decoration:none; }
 
   .places-grid{ grid-template-columns:repeat(2, 1fr); }
   .place-card img{ height:110px; }
+
+  #outstationModal .place-card:hover{ transform:none; box-shadow:none; }
+  .gallery-item:hover{ transform:none; box-shadow:none; }
+  .gallery-item figcaption{ transform: translateY(0); }
 }
 @media(max-width:560px){
   .pill-grid{ grid-template-columns:1fr; }
@@ -493,139 +527,3 @@ a{ color:var(--primary); text-decoration:none; }
 @media(max-width:600px){
   .gallery-item img{ height:160px; }
 }
-
-
-/* 3) Slightly nicer rounding for feature cards */
-.grid .card{
-  border-radius: 16px;
-}
-
-/* ===== PREMIUM LOOK (ONLY HOME FEATURE CARDS) ===== */
-.hero-feature .card{
-  border-radius: 16px;
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.hero-feature .card:hover{
-  transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(0,0,0,.18);
-}
-/* ===== PREMIUM GALLERY CARDS ONLY ===== */
-.gallery-item{
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #0b1220;
-  transition: transform .35s ease, box-shadow .35s ease;
-}
-
-/* Image smooth zoom */
-.gallery-item img{
-  transition: transform .45s ease;
-}
-
-/* Caption overlay polish */
-.gallery-item figcaption{
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #fff;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,.75),
-    rgba(0,0,0,.25),
-    transparent
-  );
-  transform: translateY(100%);
-  transition: transform .35s ease;
-}
-
-/* Hover effect */
-.gallery-item:hover{
-  transform: translateY(-6px);
-  box-shadow: 0 20px 45px rgba(0,0,0,.35);
-}
-
-.gallery-item:hover img{
-  transform: scale(1.08);
-}
-
-.gallery-item:hover figcaption{
-  transform: translateY(0);
-}
-
-/* Click feel */
-.gallery-item:active{
-  transform: scale(.98);
-}
-
-/* Mobile: disable heavy motion */
-@media (max-width: 600px){
-  .gallery-item:hover{
-    transform: none;
-    box-shadow: none;
-  }
-  .gallery-item figcaption{
-    transform: translateY(0);
-  }
-}
-
-
-.hero-feature .card:active{
-  transform: scale(.98);
-}
-
-/* ===== PREMIUM OUTSTATION PLACE CARDS (ONLY inside outstation modal) ===== */
-#outstationModal .place-card{
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  transition: transform .35s ease, box-shadow .35s ease;
-}
-
-#outstationModal .place-card img{
-  transition: transform .45s ease;
-}
-
-/* Make the place name look premium */
-#outstationModal .place-card span{
-  position:absolute;
-  left:0; right:0; bottom:0;
-  padding:12px;
-  font-size:16px;
-  font-weight:700;
-  color:#fff;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,.75),
-    rgba(0,0,0,.25),
-    transparent
-  );
-}
-
-/* Hover (desktop) */
-#outstationModal .place-card:hover{
-  transform: translateY(-6px);
-  box-shadow: 0 20px 45px rgba(0,0,0,.25);
-}
-
-#outstationModal .place-card:hover img{
-  transform: scale(1.08);
-}
-
-/* Click feel */
-#outstationModal .place-card:active{
-  transform: scale(.98);
-}
-
-/* Mobile: keep it stable (no hover jump) */
-@media (max-width: 600px){
-  #outstationModal .place-card:hover{
-    transform: none;
-    box-shadow: none;
-  }
-}
-
-
