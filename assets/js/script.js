@@ -1,4 +1,4 @@
-/* Naveen Tours & Travels - script.js (FINAL COMPLETE + Maps + Mobile Menu + Outstation Popup + Tirupati Gallery) */
+/* Naveen Tours & Travels - script.js (ALL PLACES GALLERIES) */
 
 const CONFIG = {
   owner: 'Naveen Tours & Travels',
@@ -61,7 +61,6 @@ function attachAutocomplete(inputId, boxId) {
     box.innerHTML = '';
     open = false;
   }
-
   function show() {
     box.style.display = 'block';
     open = true;
@@ -70,7 +69,6 @@ function attachAutocomplete(inputId, boxId) {
   input.addEventListener('input', () => {
     const q = input.value.trim().toLowerCase();
     box.innerHTML = '';
-
     if (q.length < 2) return hide();
 
     const matches = INDIA_PLACES
@@ -98,9 +96,7 @@ function attachAutocomplete(inputId, boxId) {
   });
 
   document.addEventListener('pointerdown', (e) => {
-    if (open && !box.contains(e.target) && e.target !== input) {
-      hide();
-    }
+    if (open && !box.contains(e.target) && e.target !== input) hide();
   });
 }
 
@@ -128,9 +124,7 @@ function renderSummary() {
   if (!box) return;
 
   let data = {};
-  try {
-    data = JSON.parse(localStorage.getItem('booking') || '{}');
-  } catch {}
+  try { data = JSON.parse(localStorage.getItem('booking') || '{}'); } catch {}
 
   box.innerHTML = `
     <h3>Trip Summary</h3>
@@ -181,7 +175,6 @@ function initContactForm() {
 
   const emailBtn = document.getElementById('emailFallback');
   const status = document.getElementById('formStatus');
-
   const get = id => document.getElementById(id)?.value.trim() || '';
 
   function showStatus(msg, type) {
@@ -232,7 +225,6 @@ function initMobileMenu() {
   const menuBtn = document.getElementById('menuBtn');
   const menuClose = document.getElementById('menuClose');
   const mobileMenu = document.getElementById('mobileMenu');
-
   if (!menuBtn || !menuClose || !mobileMenu) return;
 
   menuBtn.addEventListener('click', () => {
@@ -253,32 +245,32 @@ function initMobileMenu() {
   });
 }
 
-/* ================= TIRUPATI GALLERY MODAL ================= */
-function initTirupatiGallery() {
-  const tiruModal = document.getElementById('tirupatiModal');
-  const tiruClose = document.getElementById('tirupatiClose');
+/* ================= GALLERY HELPERS (ALL PLACES) ================= */
+function openModal(modalId) {
+  const m = document.getElementById(modalId);
+  if (!m) return false;
+  m.classList.add('show');
+  m.setAttribute('aria-hidden', 'false');
+  return true;
+}
+function closeModal(modalId) {
+  const m = document.getElementById(modalId);
+  if (!m) return;
+  m.classList.remove('show');
+  m.setAttribute('aria-hidden', 'true');
+}
+function attachGalleryModal(modalId, closeBtnId) {
+  const modal = document.getElementById(modalId);
+  const closeBtn = document.getElementById(closeBtnId);
+  if (!modal || !closeBtn) return;
 
-  if (!tiruModal || !tiruClose) return;
-
-  const open = () => {
-    tiruModal.classList.add('show');
-    tiruModal.setAttribute('aria-hidden', 'false');
-  };
-
-  const close = () => {
-    tiruModal.classList.remove('show');
-    tiruModal.setAttribute('aria-hidden', 'true');
-  };
-
-  tiruClose.addEventListener('click', close);
-  tiruModal.addEventListener('click', (e) => {
-    if (e.target === tiruModal) close();
+  closeBtn.addEventListener('click', () => closeModal(modalId));
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal(modalId);
   });
-
-  return { open, close };
 }
 
-/* ================= OUTSTATION POPUP ================= */
+/* ================= OUTSTATION POPUP + OPEN CORRECT GALLERY ================= */
 function initOutstationPopup() {
   const outstationCard = document.getElementById('outstationCard');
   const outstationModal = document.getElementById('outstationModal');
@@ -286,41 +278,48 @@ function initOutstationPopup() {
 
   if (!outstationCard || !outstationModal || !outstationClose) return;
 
-  const tiruGallery = initTirupatiGallery(); // may be null if modal not present
-
-  const openModal = () => {
+  const openOutstation = () => {
     outstationModal.classList.add('show');
     outstationModal.setAttribute('aria-hidden', 'false');
   };
-
-  const closeModal = () => {
+  const closeOutstation = () => {
     outstationModal.classList.remove('show');
     outstationModal.setAttribute('aria-hidden', 'true');
   };
 
-  outstationCard.addEventListener('click', openModal);
-  outstationClose.addEventListener('click', closeModal);
+  outstationCard.addEventListener('click', openOutstation);
+  outstationClose.addEventListener('click', closeOutstation);
 
   outstationModal.addEventListener('click', (e) => {
-    if (e.target === outstationModal) closeModal();
+    if (e.target === outstationModal) closeOutstation();
   });
 
-  // Click place cards
+  // map place -> gallery modal id
+  const galleryMap = {
+    tirupati: 'tirupatiModal',
+    hyderabad: 'hyderabadModal',
+    bengaluru: 'bengaluruModal',
+    visakhapatnam: 'visakhapatnamModal',
+    vijayawada: 'vijayawadaModal',
+  };
+
   document.querySelectorAll('.place-card').forEach((card) => {
     card.addEventListener('click', () => {
-      const place = card.getAttribute('data-place') || card.innerText.trim();
+      const place = (card.getAttribute('data-place') || card.innerText || '').trim();
+      const key = place.toLowerCase();
 
-      // ✅ If Tirupati, open gallery instead of autofill/close
-      if (place.toLowerCase() === 'tirupati' && tiruGallery && tiruGallery.open) {
-        closeModal();
-        tiruGallery.open();
+      // open gallery if exists
+      const modalId = galleryMap[key];
+      if (modalId) {
+        closeOutstation();
+        openModal(modalId);
         return;
       }
 
-      // Normal behavior: autofill "Going To" and close outstation modal
+      // otherwise autofill destination
       const dst = document.getElementById('dst');
       if (dst) dst.value = place;
-      closeModal();
+      closeOutstation();
     });
   });
 }
@@ -335,12 +334,15 @@ window.addEventListener('DOMContentLoaded', () => {
   initOutstationPopup();
   setYear();
 
+  // Search form
   const form = document.getElementById('searchForm');
   if (form) form.addEventListener('submit', handleSearchSubmit);
 
+  // Autocomplete
   attachAutocomplete('src', 'srcSuggestions');
   attachAutocomplete('dst', 'dstSuggestions');
 
+  // Today / Tomorrow
   const dateInput = document.getElementById('date');
   const btnToday = document.getElementById('btnToday');
   const btnTomorrow = document.getElementById('btnTomorrow');
@@ -356,4 +358,11 @@ window.addEventListener('DOMContentLoaded', () => {
       dateInput.value = d.toISOString().slice(0, 10);
     });
   }
+
+  // Attach close behavior for all gallery modals (if they exist)
+  attachGalleryModal('tirupatiModal', 'tirupatiClose');
+  attachGalleryModal('hyderabadModal', 'hyderabadClose');
+  attachGalleryModal('bengaluruModal', 'bengaluruClose');
+  attachGalleryModal('visakhapatnamModal', 'visakhapatnamClose');
+  attachGalleryModal('vijayawadaModal', 'vijayawadaClose');
 });
