@@ -577,3 +577,55 @@ a{ color:var(--primary); text-decoration:none; }
   transform: scale(.98);
 }
 
+/* ===== PREMIUM OUTSTATION PLACE CARDS (ONLY inside outstation modal) ===== */
+#outstationModal .place-card{
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+#outstationModal .place-card img{
+  transition: transform .45s ease;
+}
+
+/* Make the place name look premium */
+#outstationModal .place-card span{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding:12px;
+  font-size:16px;
+  font-weight:700;
+  color:#fff;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.75),
+    rgba(0,0,0,.25),
+    transparent
+  );
+}
+
+/* Hover (desktop) */
+#outstationModal .place-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px rgba(0,0,0,.25);
+}
+
+#outstationModal .place-card:hover img{
+  transform: scale(1.08);
+}
+
+/* Click feel */
+#outstationModal .place-card:active{
+  transform: scale(.98);
+}
+
+/* Mobile: keep it stable (no hover jump) */
+@media (max-width: 600px){
+  #outstationModal .place-card:hover{
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+
