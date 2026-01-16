@@ -527,3 +527,24 @@ a{ color:var(--primary); text-decoration:none; }
 @media(max-width:600px){
   .gallery-item img{ height:160px; }
 }
+
+/* ===== Transparent Pricing Popup Actions ===== */
+.pricing-actions{
+  display: flex;
+  gap: 12px;              /* ✅ space between buttons */
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.pricing-actions .btn{
+  flex: 1;                /* equal width buttons */
+  text-align: center;
+}
+
+/* Mobile stack */
+@media (max-width: 480px){
+  .pricing-actions{
+    flex-direction: column;
+  }
+}
+
