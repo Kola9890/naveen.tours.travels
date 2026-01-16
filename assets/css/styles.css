@@ -547,4 +547,18 @@ a{ color:var(--primary); text-decoration:none; }
     flex-direction: column;
   }
 }
+.pricing-actions{
+  display:flex;
+  gap:12px;
+  margin-top:16px;
+  flex-wrap:wrap;
+}
+.pricing-actions .btn{
+  flex:1;
+  text-align:center;
+}
+@media(max-width:480px){
+  .pricing-actions{ flex-direction:column; }
+}
+
 
